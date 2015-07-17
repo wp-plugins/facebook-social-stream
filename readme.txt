@@ -1,9 +1,9 @@
 === Facebook Social Stream ===
 Contributors: Daniele Angileri
-Tags: facebook, facebook stream, facebook feed, facebook page, social media, social stream, responsive, mobile
+Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,9 +19,32 @@ Just configure the Facebook page name and add the shortcode `[fb_social_stream]`
 Have a look at my **[example](http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-stream/)** page for a live demo.
 
 
+= Info = 
+This plugin was officially released at **July 17th 2015** and will be ongoing improved by new features.
+If you have found some bugs or if you have feature requests, please do not hesitate to get in touch with me!
+
+It would be nice to contact me if you have troubles before you leave a bad rating. Thanks :)
+
+
 = Contact =
 * [Check for more information here](http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-stream/)
 * [Get free help from me here](http://angileri.de/#contact)
+* [Forums](https://wordpress.org/support/plugin/facebook-social-stream)
+
+
+= Philosophy =
+* KISS principle (keep it simple, stupid)
+* Easiest possible configuration
+* Help whenever needed as fast as possible
+
+
+= Features =
+* Easy to add via shortcode `[fb_social_stream]`
+* Responsive behaviour
+* Crawlable by search engine bots
+* Fast delivery by caching
+* HTML-links of Hashtags
+* HTML-links of message URLs
 
 
 == Installation ==
@@ -40,6 +63,10 @@ Have a look at my **[example](http://angileri.de/blog/en/free-wordpress-plugin-f
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+
+= 1.2.2 =
+* Validation of Facebook page-name
+* Changed CSS to add responsive behaviour to profile image
 
 = 1.2.1 =
 * Renamed classes to prevent conflicts with other plugins or themes

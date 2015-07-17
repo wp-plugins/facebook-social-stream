@@ -98,7 +98,8 @@ class FBSS_Admin {
 		$this->logger->log("initPageSettings.", __LINE__);
 		
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_setting_fb_page_name');
+							'wp_fb_social_stream_setting_fb_page_name',
+							array($this, 'validateFBPageName'));
 		register_setting('wp-fb-social-stream-settings-group', 
 							'wp_fb_social_stream_setting_fb_access_token');
 		register_setting('wp-fb-social-stream-settings-group', 
@@ -112,6 +113,17 @@ class FBSS_Admin {
 	public function intval($input) {
 		$this->logger->log("Validation intval '$input'.", __LINE__);
 		return intval($input);
+	}
+	
+	public function validateFBPageName($input) {
+		$this->logger->log("Validation FBPageName '$input'.", __LINE__);
+		$fb_page_name = $input;
+		
+		if (preg_match('/(https?:\/\/)?(www\.)?facebook\.com\/(.*)/i', $fb_page_name, $match)) {
+			$fb_page_name = $match[3];
+		}
+		
+		return $fb_page_name;
 	}
 	
 	public function onSettingsSave() {

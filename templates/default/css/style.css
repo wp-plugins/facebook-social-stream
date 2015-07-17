@@ -30,9 +30,12 @@
 	max-width: 48px;
 	text-align: center;
 }
-.wp-fb-social-stream .fb-user-img img {
+.wp-fb-social-stream .fb-user-img {
 	max-width: 48px;
-	max-height: 48px;
+}
+.wp-fb-social-stream .fb-user-img img {
+	max-width: 100%;
+	height: auto;
 }
 .wp-fb-social-stream .fb-message-wrap {
 	width: 83.33333333%;

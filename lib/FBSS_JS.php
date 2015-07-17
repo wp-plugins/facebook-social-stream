@@ -8,7 +8,7 @@ class FBSS_JS {
 	
 	private static $logger;
 	private static $plugin_dir_url;
-	private static $version = '1.0.0';
+	private static $version = '1.0.2';
 	
 	public static function register() {
 		self::$logger = new FBSS_Logger(__CLASS__);
@@ -23,6 +23,9 @@ class FBSS_JS {
 		self::$logger->log("Enqueued JS.", __LINE__);
 		
 		wp_enqueue_script( 'wp-fb-social-stream-js' );
+		wp_localize_script('wp-fb-social-stream-js', 
+			'wp_fb_social_stream_js_vars', 
+			array( 'ajaxurl' => admin_url('admin-ajax.php') ));
 	}
 	
 	public static function register_action() {

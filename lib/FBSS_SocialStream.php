@@ -48,15 +48,15 @@ class FBSS_SocialStream {
 			
 			#$this->logger->log("Message: ".print_r($messages, true), __LINE__);
 			
-			$msg_share_link = $this->getShareLinkFromJSON($msg_data_obj);
+			$msg_type = $msg_data_obj->type;
+			
+			$msg_share_link = $this->getShareLinkFromJSON($msg_obj_id, $msg_data_obj, $msg_type);
 			
 			if (property_exists($msg_data_obj, 'message')) {
 				$msg_text = $msg_data_obj->message;
 			} else {
 				$msg_text = '';
 			}
-			
-			$msg_type = $msg_data_obj->type;
 			
 			$msg_date_iso_8601 = date('Y-m-d', strtotime($msg_data_obj->created_time));
 			$msg_date_month = date('F', strtotime($msg_data_obj->created_time));
@@ -138,6 +138,9 @@ class FBSS_SocialStream {
 						$link_description = substr($link_description,0, 120) . "..."; 
 					}
 				}
+			} else if ($msg_type == 'video') {
+				# TODO add video player
+				continue;
 			}
 			
 			ob_start();
@@ -352,7 +355,7 @@ class FBSS_SocialStream {
 		return $comment_count_json;
 	}
 	
-	private function getShareLinkFromJSON($objMessage) {
+	private function getShareLinkFromJSON($msg_obj_id, $objMessage, $msg_type) {
 		if (property_exists($objMessage, 'actions')) {
 			$actions = $objMessage->actions;
 			if (is_array($actions)) {
@@ -361,6 +364,20 @@ class FBSS_SocialStream {
 						return $action->link;
 					}
 				}
+			}
+		} else {
+			// fallback
+			
+			if ($msg_type == 'photo') {
+				// if there is no action, then link to gallery itself
+				if (preg_match('/(.+)_(.+)/i', $msg_obj_id, $match)) {
+					return 'https://www.facebook.com/'.$this->page_name.'/posts/'.
+							$match[2];
+				}
+			}
+			
+			if (property_exists($objMessage, 'link')) {
+				return $objMessage->link;
 			}
 		}
 		

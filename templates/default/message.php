@@ -69,11 +69,11 @@
 			<?php if ($msg_type == 'link') : ?>
 			<!-- .fb-message-linkbox -->
 			<div class="fb-message-linkbox" onclick="window.open('<?php echo esc_html($link_src); ?>', '_blank'); return false;">
-				<div class="fb-message-linkbox-img">
 				<?php if ($link_img) : ?>
+				<div class="fb-message-linkbox-img">
 					<img src="<?php echo esc_html($link_img); ?>" alt="<?php _e('Link', 'wp-fb-social-stream'); ?> <?php echo esc_html($link_src); ?>" />
-				<?php endif; ?>
 				</div>
+				<?php endif; ?>
 				<div class="fb-message-linkbox-txt">
 				<?php if ($link_name) : ?>
 					<div class="fb-message-linkbox-name">

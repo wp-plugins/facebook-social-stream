@@ -101,9 +101,13 @@
 }
 .wp-fb-social-stream .fb-message-linkbox-txt {
 	float: right;
-	width: 75%;
-	margin-left: 5%;
+	width: 100%;
 }
+.wp-fb-social-stream .fb-message-linkbox-img + .fb-message-linkbox-txt {
+	margin-left: 5%;
+	width: 75%;
+}
+
 .wp-fb-social-stream .fb-message-linkbox-name {
 	font-weight: bold;
 }

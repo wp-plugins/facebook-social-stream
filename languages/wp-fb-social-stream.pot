@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress Plugin Facebook Social Stream\n"
+"POT-Creation-Date: 2015-07-15 18:12+0100\n"
+"PO-Revision-Date: 2015-07-15 18:14+0100\n"
+"Last-Translator: Daniel Anglileri\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/Admin.php:40
+msgid "Facebook Social Stream Settings"
+msgstr "Facebook Social Stream Einstellungen"
+
+#: lib/Admin.php:52
+msgid "Facebook Page Name"
+msgstr "Name Facebook Seite"
+
+#: lib/Admin.php:56
+msgid ""
+"You can idintify the page-name as follows: https://www.facebook.com/"
+"{<strong>page-name</strong>}"
+msgstr ""
+"Der Name der Facebook Seite kann wie folgt identifiziert werden: https://www."
+"facebook.com/{<strong>Seiten-Name</strong>}"
+
+#: lib/Admin.php:61
+msgid "Facebook Access Token"
+msgstr "Facebook Access Token"
+
+#: lib/Admin.php:64
+msgid "optional"
+msgstr "optional"
+
+#: lib/Admin.php:65
+msgid ""
+"Either use your own one with specific rights or leave it empty to use the "
+"plugin-default"
+msgstr ""
+"Füge entweder deinen eigenen Access Token hier ein oder lass das Feld leer, "
+"um den Default-Token zu benutzen"
+
+#: lib/Admin.php:70
+msgid "Update interval"
+msgstr "Update Intervall"
+
+#: lib/Admin.php:73
+msgid "minutes"
+msgstr "Minuten"
+
+#: lib/Admin.php:74
+msgid "Default value is 30 minutes"
+msgstr "Der Default-Wert entspricht 30 Minuten"
+
+#: lib/Admin.php:79
+msgid "Max messages"
+msgstr "Maximale Nachrichtenanzahl"
+
+#: lib/Admin.php:83
+msgid "Default value is 20 messages"
+msgstr "Der Default-Wert entspricht 20 Nachrichten"
+
+#: lib/Admin.php:132
+msgid "Retrieved and updated Facebook data."
+msgstr "Facebook Daten empfangen und aktualisiert"
+
+#: lib/Admin.php:139
+msgid "Could not retrieve Facebook data. Please check your settings."
+msgstr ""
+"Konnte keine Facebook Daten empfangen. Bitte prüfe deine Einstellungen."
+
+#: lib/SocialStream.php:66
+msgid "jS \\of %\\s Y h:i A"
+msgstr "\\a\\m d. %\\s Y \\u\\m H:i \\U\\h\\r"
+
+#: templates/default/message.php:15
+msgid "profile picture"
+msgstr "Profilbild"
+
+#: templates/default/message.php:35 templates/default/message.php:57
+msgid "Link"
+msgstr "Link"
+
+#: templates/default/message.php:47
+msgid "Message image"
+msgstr "Nachrichtenbild"
+
+#: wp-fb-social-stream.php:129
+msgid "Settings"
+msgstr "Einstellungen"
+
+#~ msgid "at"
+#~ msgstr "am"
+
+#~ msgid "am"
+#~ msgstr "at"

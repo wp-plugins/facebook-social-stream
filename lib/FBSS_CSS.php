@@ -7,7 +7,7 @@ class FBSS_CSS {
 	
 	private static $logger;
 	private static $plugin_dir_url;
-	private static $version = '1.0.1';
+	private static $version = '1.0.2';
 	
 	public static function register() {
 		self::$logger = new FBSS_Logger(__CLASS__);

@@ -12,9 +12,16 @@ The Facebook Social Stream plugin allows you to simply display a Facebook feed o
 == Description ==
 
 The Facebook Social Stream plugin generates a **responsive**, **SEO optimized** and **cached** Facebook feed for your website.
-You do not even need a Facebook API key! 
+**You do not even need a Facebook API key!** 
 
 Just configure the Facebook page name and add the shortcode `[fb_social_stream]` to your page. That's it.
+
+Have a look at my **[example](http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-stream/)** page for a live demo.
+
+
+= Contact =
+* [Check for more information here](http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-stream/)
+* [Get free help from me here](http://angileri.de/#contact)
 
 
 == Installation ==
@@ -28,7 +35,9 @@ Just configure the Facebook page name and add the shortcode `[fb_social_stream]`
 
 
 == Screenshots ==
-
+1. Plugin configuration
+2. Example stream of Facebook page "angileri.de"
+3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
 
@@ -52,4 +61,5 @@ Just configure the Facebook page name and add the shortcode `[fb_social_stream]`
 = 1.0.0  =
 * First version ready to go!
 
-<major>.<feature>.<hotfix>
+
+`<major>.<feature>.<hotfix>`

@@ -69,7 +69,7 @@ class FBSS_Admin {
 									<label for="wp_fb_social_stream_settings_update_interval">'.__('Update interval', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_settings_update_interval" value="'.esc_attr( get_option('wp_fb_social_stream_settings_update_interval', 1800) ).'" class="regular-text" /> ('.__('minutes', 'wp-fb-social-stream').')
+						        	<input type="text" name="wp_fb_social_stream_settings_update_interval" value="'.esc_attr( get_option('wp_fb_social_stream_settings_update_interval', 30) ).'" class="regular-text" /> ('.__('minutes', 'wp-fb-social-stream').')
 						        	<p class="description">'.__('Default value is 30 minutes', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>

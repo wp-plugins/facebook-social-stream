@@ -46,8 +46,8 @@ class FBSS_DB {
 				timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY (id),
 				CONSTRAINT uc_object UNIQUE (object_id,type)
-			) $charset_collate;";
-				
+			) ENGINE=InnoDB $charset_collate;";
+
 			dbDelta($sql);
 			add_option($this->db_version_key, $this->db_version);
 		} else {

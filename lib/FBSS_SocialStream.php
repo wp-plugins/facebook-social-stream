@@ -4,6 +4,7 @@ require_once('FBSS_DB.php');
 require_once('FBSS_Facebook.php');
 require_once('FBSS_Logger.php');
 require_once('FBSS_Registry.php');
+require_once('FBSS_Template.php');
 
 
 class FBSS_SocialStream {
@@ -11,6 +12,8 @@ class FBSS_SocialStream {
 	private $db;
 	private $facebook;
 	private $logger;
+	private $template;
+	private $template_name;
 	
 	private $page_id;
 	private $page_name;
@@ -24,6 +27,8 @@ class FBSS_SocialStream {
 		$this->db = new FBSS_DB;
 		$this->facebook = new FBSS_Facebook;
 		$this->logger = new FBSS_Logger(__CLASS__);
+		$this->template = new FBSS_Template;
+		$this->template_name = $this->template->getName();
 	}
 	
 	public function get($limit=20) {
@@ -144,14 +149,16 @@ class FBSS_SocialStream {
 			}
 			
 			ob_start();
-			include(plugin_dir_path( __FILE__ ).'../templates/default/message.php');
+			include(plugin_dir_path( __FILE__ ).'../templates/'.
+					$this->template_name.'/message.php');
 			$social_stream_html .= ob_get_clean();
 			
 			$i++;
 		}
 		
 		ob_start();
-		include(plugin_dir_path( __FILE__ ).'../templates/default/wrapper.php');
+		include(plugin_dir_path( __FILE__ ).'../templates/'.
+				$this->template_name.'/wrapper.php');
 		$html = ob_get_clean();
 		
 		return $html;

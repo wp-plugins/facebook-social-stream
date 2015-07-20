@@ -44,14 +44,17 @@
 					$msg_text = esc_html($msg_text);
 					
 					// ...then create html links
-					$search = '/(https?:\/\/(.+))( |$|\n)/i';
-					$replace = '<a href="$1" rel="nofollow" target="_blank">$1</a>';
+					$search = '/(https?:\/\/(.+?))(\s|$|\n)/i';
+					$replace = '<a href="$1" rel="nofollow" target="_blank">$1</a> ';
 					$msg_text = preg_replace($search, $replace, $msg_text);
 					
 					// ... and replace hashtags
-					$search = '/([^&]#(.+))( |$|\n|,|\.)/i';
-					$replace = '<a href="https://www.facebook.com/hashtag/$2" rel="nofollow" target="_blank">$1</a>';
+					$search = '/([^&]#(.+?))(\s|$|\n|,|\.)/i';
+					$replace = ' <a href="https://www.facebook.com/hashtag/$2" rel="nofollow" target="_blank">#$2</a> ';
 					$msg_text = preg_replace($search, $replace, $msg_text);
+					
+					// replace \n with html line breaks
+					$msg_text = preg_replace('/\n/', '<br />', $msg_text);
 					
 					echo $msg_text;
 				?>

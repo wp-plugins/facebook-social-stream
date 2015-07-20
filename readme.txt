@@ -3,7 +3,7 @@ Contributors: Daniele Angileri
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,9 @@ In order to read Facebook data via the Facebook Graph API you need to authentica
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+
+= 1.3.1 =
+* Improved regex to identify hashtags and links in message-text
 
 = 1.3.0 =
 * Added color-customization to plugin-settings

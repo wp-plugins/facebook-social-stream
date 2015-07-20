@@ -53,6 +53,9 @@
 					$replace = ' <a href="https://www.facebook.com/hashtag/$2" rel="nofollow" target="_blank">#$2</a> ';
 					$msg_text = preg_replace($search, $replace, $msg_text);
 					
+					// replace \n with html line breaks
+					$msg_text = preg_replace('/\n/', '<br />', $msg_text);
+					
 					echo $msg_text;
 				?>
 			</div>

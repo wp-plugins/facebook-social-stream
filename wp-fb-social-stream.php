@@ -5,7 +5,7 @@ Plugin URI: http://angileri.de/blog/wordpress-plugin-facebook-social-stream/
 Description: Reads facebook page data and provides social stream
 Author: Daniele Angileri <daniele@angileri.det>
 Author URI: http://angileri.de
-Version: 1.2.6
+Version: 1.3.1
 Text Domain: wp-fb-social-stream
 License: GPLv2
 
@@ -34,12 +34,13 @@ require_once('lib/FBSS_Logger.php');
 require_once('lib/FBSS_Registry.php');
 require_once('lib/FBSS_Shortcodes.php');
 require_once('lib/FBSS_SocialStream.php');
+require_once('lib/FBSS_Template.php');
 
 
 class WP_FB_SocialStream {
 	
 	private static $plugin_name = 'WP FB Social Stream';
-	private static $plugin_version = '1.2.6';
+	private static $plugin_version = '1.3.1';
 	private static $plugin_version_key = 'wp_fb_social_stream_plugin_version';
 	
 	private static $logger;
@@ -57,6 +58,7 @@ class WP_FB_SocialStream {
 		// init registry with plugin data first
 		FBSS_Registry::set('plugin_name', self::$plugin_name);
 		FBSS_Registry::set('plugin_base_dir_url', plugin_dir_url(__FILE__));
+		FBSS_Registry::set('plugin_base_dir', plugin_dir_path(__FILE__));
 		FBSS_Registry::set('fb_page_name', $fb_page_name);
 		FBSS_Registry::set('fb_access_token', $fb_access_token);
 		FBSS_Registry::set('stream_msg_limit', self::$stream_msg_limit);
@@ -74,6 +76,9 @@ class WP_FB_SocialStream {
 		/* translations */
 		add_action('plugins_loaded', array(__CLASS__, 'initTextDomain'));
 		
+		/* init plugin template */
+		self::initTemplate();
+		
 		if( is_admin() ) {
 			/* administration submenu */
 			$admin = new FBSS_Admin;
@@ -85,7 +90,7 @@ class WP_FB_SocialStream {
 		
 		/* check plugin version */
 		self::checkPluginVersion();
-
+		
 		/* register shortcodes */
 		FBSS_Shortcodes::register();
 		
@@ -120,6 +125,16 @@ class WP_FB_SocialStream {
 		delete_option('wp_fb_social_stream_settings_update_interval');
 		delete_option('wp_fb_social_stream_settings_last_data_update');
 		delete_option('wp_fb_social_stream_settings_msg_limit');
+		
+		# delete template-customization data
+		$all_options = wp_load_alloptions();
+		foreach ($all_options as $key => $val) {
+			if (preg_match('/^fbss_tplt_cfg_/', $key)) {
+				delete_option($key);
+			}
+		}
+		
+		delete_option('fbss_admin_update_social_stream');
 	}
 	
 	public static function setPluginSettingsLink($links) {
@@ -192,6 +207,7 @@ class WP_FB_SocialStream {
 				self::$logger->log("Plugin version '$prev_version' is ".
 						"outdated.",	__LINE__);
 				self::updateTasks($prev_version);
+				update_option($plugin_version_key, $cur_version);
 			}
 		} else {
 			add_option($plugin_version_key, $cur_version);
@@ -207,6 +223,11 @@ class WP_FB_SocialStream {
 				"'$cur_version'.", __LINE__);
 		
 		# implement update tasks here as soon as there exists some 
+	}
+	
+	private static function initTemplate() {
+		self::$logger->log("Init template configuration.", __LINE__);
+		$template = new FBSS_Template;
 	}
 }
 

@@ -38,8 +38,8 @@ class FBSS_DB {
 			// create it
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				object_id VARCHAR(255) NOT NULL,
-				type VARCHAR(255) NOT NULL,
+				object_id VARCHAR(100) NOT NULL,
+				type VARCHAR(50) NOT NULL,
 				data text NOT NULL,
 				created_time DATETIME,
 				updated_time DATETIME,

@@ -3,7 +3,7 @@ Contributors: Daniele Angileri
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.2.5
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,7 @@ It would be nice to contact me if you have troubles before you leave a bad ratin
 
 = Features =
 * Easy to add via shortcode `[fb_social_stream]`
+* Customizable appearance without CSS knowledge
 * Responsive behaviour
 * Crawlable by search engine bots
 * Fast delivery by caching
@@ -75,6 +76,8 @@ In order to read Facebook data via the Facebook Graph API you need to authentica
 = Do I need a Facebook Access Token? =
 **No**. If you don't have an Access Token the Facebook Social Stream plugin uses a fallback service to retrieve the data.
 
+= Can I change the appearance of the stream? =
+**Yes**. You can simply change the style of your stream within the plugin-settings. A color-picker supports you to find the right color hue easily.
 
 
 == Screenshots ==
@@ -83,6 +86,16 @@ In order to read Facebook data via the Facebook Graph API you need to authentica
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+
+= 1.3.0 =
+* Added color-customization to plugin-settings
+* Added color-picker to settings page
+* Introduced configuration of template-styling
+* Save current version number in database for later update routines
+* Update stream automatically if page-name or access-token changed or max-messages increased
+
+= 1.2.6 =
+* Set Javascript variables via wp_localize_script() to identify ajax-url in script
 
 = 1.2.5 =
 * Changed default value of update interval

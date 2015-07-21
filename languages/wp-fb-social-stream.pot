@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WordPress Plugin Facebook Social Stream\n"
-"POT-Creation-Date: 2015-07-20 15:58+0100\n"
-"PO-Revision-Date: 2015-07-20 15:58+0100\n"
+"POT-Creation-Date: 2015-07-21 18:37+0100\n"
+"PO-Revision-Date: 2015-07-21 18:37+0100\n"
 "Last-Translator: Daniel Anglileri\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,19 +15,19 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: lib/FBSS_Admin.php:52
+#: lib/FBSS_Admin.php:54
 msgid "Facebook Social Stream Settings"
 msgstr "Facebook Social Stream Einstellungen"
 
-#: lib/FBSS_Admin.php:60
+#: lib/FBSS_Admin.php:65
 msgid "Facebook options"
 msgstr "Facebook Einstellungen"
 
-#: lib/FBSS_Admin.php:65
+#: lib/FBSS_Admin.php:70
 msgid "Facebook Page Name"
 msgstr "Name Facebook Seite"
 
-#: lib/FBSS_Admin.php:69
+#: lib/FBSS_Admin.php:74
 msgid ""
 "You can idintify the page-name as follows: https://www.facebook.com/"
 "{<strong>page-name</strong>}"
@@ -35,15 +35,15 @@ msgstr ""
 "Der Name der Facebook Seite kann wie folgt identifiziert werden: https://www."
 "facebook.com/{<strong>Seiten-Name</strong>}"
 
-#: lib/FBSS_Admin.php:74
+#: lib/FBSS_Admin.php:79
 msgid "Facebook Access Token"
 msgstr "Facebook Access Token"
 
-#: lib/FBSS_Admin.php:77
+#: lib/FBSS_Admin.php:82
 msgid "optional"
 msgstr "optional"
 
-#: lib/FBSS_Admin.php:78
+#: lib/FBSS_Admin.php:83
 msgid ""
 "Either use your own one with specific rights or leave it empty to use the "
 "plugin-default"
@@ -51,48 +51,104 @@ msgstr ""
 "Füge entweder deinen eigenen Access Token hier ein oder lass das Feld leer, "
 "um den Default-Token zu benutzen"
 
-#: lib/FBSS_Admin.php:90
+#: lib/FBSS_Admin.php:95
 msgid "Stream options"
 msgstr "Stream Einstellungen"
 
-#: lib/FBSS_Admin.php:95
+#: lib/FBSS_Admin.php:100
 msgid "Update interval"
 msgstr "Update Intervall"
 
-#: lib/FBSS_Admin.php:98
+#: lib/FBSS_Admin.php:103
 msgid "minutes"
 msgstr "Minuten"
 
-#: lib/FBSS_Admin.php:99
+#: lib/FBSS_Admin.php:104
 msgid "Default value is 30 minutes"
 msgstr "Der Default-Wert entspricht 30 Minuten"
 
-#: lib/FBSS_Admin.php:104
+#: lib/FBSS_Admin.php:109
 msgid "Max messages"
 msgstr "Maximale Nachrichtenanzahl"
 
-#: lib/FBSS_Admin.php:108
+#: lib/FBSS_Admin.php:113
 msgid "Default value is 20 messages"
 msgstr "Der Default-Wert entspricht 20 Nachrichten"
 
-#: lib/FBSS_Admin.php:223
+#: lib/FBSS_Admin.php:236
 msgid "Retrieved and updated Facebook data."
 msgstr "Facebook Daten empfangen und aktualisiert"
 
-#: lib/FBSS_Admin.php:230
+#: lib/FBSS_Admin.php:243
 msgid "Could not retrieve Facebook data. Please check your settings."
 msgstr ""
 "Konnte keine Facebook Daten empfangen. Bitte prüfe deine Einstellungen."
 
-#: lib/FBSS_Admin.php:275
+#: lib/FBSS_Admin.php:300
 msgid "Stream customization"
 msgstr "Stream Anpassung"
 
-#: lib/FBSS_Admin.php:276
+#: lib/FBSS_Admin.php:301
 msgid "Optional style configuration of your social stream"
 msgstr "Optionales styling deines Social Streams"
 
-#: lib/FBSS_SocialStream.php:71
+#: lib/FBSS_Admin.php:379 wp-fb-social-stream.php:203
+msgid "Y-m-d h:i:s a"
+msgstr "H:i:s d.m.Y"
+
+#: lib/FBSS_Admin.php:386
+msgid "Last stream update"
+msgstr "Letztes Stream Update"
+
+#: lib/FBSS_Admin.php:386
+msgid "update stream"
+msgstr "Update Stream"
+
+#: lib/FBSS_Admin.php:391
+msgid "Interact"
+msgstr "Mach mit"
+
+#: lib/FBSS_Admin.php:393
+msgid "Contact me for"
+msgstr "Kontaktiere mich für"
+
+#: lib/FBSS_Admin.php:395
+msgid "support"
+msgstr "Support"
+
+#: lib/FBSS_Admin.php:396
+msgid "new features"
+msgstr "neue Features"
+
+#: lib/FBSS_Admin.php:398
+msgid "I'll do my best!"
+msgstr "Ich geb' mein Bestes!"
+
+#: lib/FBSS_Admin.php:399
+msgid "You like my work? Please"
+msgstr "Dir gefällt meine Arbeit? Bitte"
+
+#: lib/FBSS_Admin.php:401
+msgid "vote for me"
+msgstr "vote für mich"
+
+#: lib/FBSS_Admin.php:402
+msgid "and tell your friends"
+msgstr "und erzähl es weiter"
+
+#: lib/FBSS_Admin.php:409
+msgid "Donation"
+msgstr "Spende"
+
+#: lib/FBSS_Admin.php:410
+msgid "Coffee"
+msgstr "Kaffee"
+
+#: lib/FBSS_Admin.php:410
+msgid "is very appreciated"
+msgstr "ist herzlich willkommen"
+
+#: lib/FBSS_SocialStream.php:75
 msgid "jS \\of %\\s Y h:i A"
 msgstr "\\a\\m d. %\\s Y \\u\\m H:i \\U\\h\\r"
 
@@ -104,8 +160,8 @@ msgstr "Nachrichten-Box"
 msgid "The main message box"
 msgstr "Die Haupt-Nachrichtenbox"
 
-#: templates/default/config.php:22 templates/default/config.php:61
-#: templates/default/config.php:77
+#: templates/default/config.php:22 templates/default/config.php:75
+#: templates/default/config.php:91
 msgid "Background color"
 msgstr "Farbe Hintergrund"
 
@@ -113,36 +169,77 @@ msgstr "Farbe Hintergrund"
 msgid "Border color"
 msgstr "Farbe Umrandung"
 
-#: templates/default/config.php:54
+#: templates/default/config.php:52
+msgid "Text color message date"
+msgstr "Farbe Datumstext"
+
+#: templates/default/config.php:59
+msgid "Text color message text"
+msgstr "Farbe Nachrichtentext"
+
+#: templates/default/config.php:68
 msgid "Meta-box"
 msgstr "Meta-Box"
 
-#: templates/default/config.php:55
+#: templates/default/config.php:69
 msgid "The meta-box contains the like and comment count"
 msgstr "Die Meta-Box enthält die Anzahl der Likes und Kommentare"
 
-#: templates/default/config.php:70
+#: templates/default/config.php:84
 msgid "Link-box"
 msgstr "Link-Box"
 
-#: templates/default/config.php:71
+#: templates/default/config.php:85
 msgid "Links inside the message-box are wrapped by the link-box"
 msgstr ""
 "Links innerhalb der Haupt-Nachrichtenbox werden von der Link-Box umgeben"
 
-#: templates/default/message.php:15
+#: templates/default/config.php:98
+msgid "Text color link name"
+msgstr "Farbe Linkname"
+
+#: templates/default/config.php:105
+msgid "Text color link description"
+msgstr "Farbe Linkbeschreibung"
+
+#: templates/default/config.php:112
+msgid "Text color link caption"
+msgstr "Farbe Linkuntertitel"
+
+#: templates/default/config.php:121
+msgid "Video-box"
+msgstr "Video-Box"
+
+#: templates/default/config.php:122
+msgid ""
+"The video-box contains the video itself and optional name and description"
+msgstr "Die Video-Box enthalt das Video und optional Name und Beschreibung"
+
+#: templates/default/config.php:128
+msgid "Text color name"
+msgstr "Farbe Name"
+
+#: templates/default/config.php:135
+msgid "Text color description"
+msgstr "Farbe Beschreibung"
+
+#: templates/default/message.php:18
 msgid "profile picture"
 msgstr "Profilbild"
 
-#: templates/default/message.php:35 templates/default/message.php:74
+#: templates/default/message.php:38 templates/default/message.php:68
 msgid "Link"
 msgstr "Link"
 
-#: templates/default/message.php:64
+#: templates/default/message.php:58
 msgid "Message image"
 msgstr "Nachrichtenbild"
 
-#: wp-fb-social-stream.php:144
+#: templates/default/message.php:99
+msgid "Your browser does not support the video tag."
+msgstr "Dein Browser unterstützt leider das HTML5 video tag nicht"
+
+#: wp-fb-social-stream.php:148
 msgid "Settings"
 msgstr "Einstellungen"
 

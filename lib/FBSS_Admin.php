@@ -3,6 +3,7 @@
 require_once('FBSS_Logger.php');
 require_once('FBSS_SocialStream.php');
 require_once('FBSS_Template.php');
+require_once('FBSS_TemplateStringUtils.php');
 
 
 class FBSS_Admin {
@@ -48,9 +49,13 @@ class FBSS_Admin {
 		$this->options = get_option('wp-fb-social-stream-option-name');
 		
 		echo '
-			<div class="wrap">
-				<h2>'.__('Facebook Social Stream Settings', 'wp-fb-social-stream') .'</h2>
-				<form method="post" action="options.php">
+		<!-- .wrap -->
+		<div class="wrap">
+			<h2>'.__('Facebook Social Stream Settings', 'wp-fb-social-stream') .'</h2>
+				
+			<!-- #wp-fb-social-stream-settings -->
+			<div id="wp-fb-social-stream-settings">
+				<form method="post" action="options.php" id="wp-fb-social-stream-settings-form">
 		';
 		
 		settings_fields('wp-fb-social-stream-settings-group');
@@ -62,19 +67,19 @@ class FBSS_Admin {
 						<tbody>
 				        	<tr>
 				        		<th scope="row">
-				        			<label for="wp_fb_social_stream_setting_fb_page_name">'.__('Facebook Page Name', 'wp-fb-social-stream').'</label>
+				        			<label for="fbss_setting_fb_page_name">'.__('Facebook Page Name', 'wp-fb-social-stream').'</label>
 				        		</th>
 				        		<td>
-				        			<input type="text" name="wp_fb_social_stream_setting_fb_page_name" value="'.esc_attr( get_option('wp_fb_social_stream_setting_fb_page_name') ).'" class="regular-text" />
+				        			<input type="text" name="fbss_setting_fb_page_name" value="'.esc_attr( get_option('fbss_setting_fb_page_name') ).'" class="regular-text" />
 				        			<p class="description">'.__('You can idintify the page-name as follows: https://www.facebook.com/{<strong>page-name</strong>}', 'wp-fb-social-stream').'</p>
 				        		</td>
 				        	</tr>
 							<tr>
 								<th scope="row">
-									<label for="wp_fb_social_stream_setting_fb_access_token">'.__('Facebook Access Token', 'wp-fb-social-stream').'</label>
+									<label for="fbss_setting_fb_access_token">'.__('Facebook Access Token', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_setting_fb_access_token" value="'.esc_attr( get_option('wp_fb_social_stream_setting_fb_access_token') ).'" class="regular-text" /> ('.__('optional', 'wp-fb-social-stream').')
+						        	<input type="text" name="fbss_setting_fb_access_token" value="'.esc_attr( get_option('fbss_setting_fb_access_token') ).'" class="regular-text" /> ('.__('optional', 'wp-fb-social-stream').')
 						        	<p class="description">'.__('Either use your own one with specific rights or leave it empty to use the plugin-default', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>
@@ -92,19 +97,19 @@ class FBSS_Admin {
 						<tbody>	
 		        			<tr>
 								<th scope="row">
-									<label for="wp_fb_social_stream_settings_update_interval">'.__('Update interval', 'wp-fb-social-stream').'</label>
+									<label for="fbss_setting_update_interval">'.__('Update interval', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_settings_update_interval" value="'.esc_attr( get_option('wp_fb_social_stream_settings_update_interval', 30) ).'" class="regular-text" /> ('.__('minutes', 'wp-fb-social-stream').')
+						        	<input type="text" name="fbss_setting_update_interval" value="'.esc_attr( get_option('fbss_setting_update_interval', 30) ).'" class="regular-text" /> ('.__('minutes', 'wp-fb-social-stream').')
 						        	<p class="description">'.__('Default value is 30 minutes', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>
 		        			<tr>
 								<th scope="row">
-									<label for="wp_fb_social_stream_settings_msg_limit">'.__('Max messages', 'wp-fb-social-stream').'</label>
+									<label for="fbss_setting_msg_limit">'.__('Max messages', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_settings_msg_limit" value="'.esc_attr( get_option('wp_fb_social_stream_settings_msg_limit', 20) ).'" class="regular-text" />
+						        	<input type="text" name="fbss_setting_msg_limit" value="'.esc_attr( get_option('fbss_setting_msg_limit', 20) ).'" class="regular-text" />
 				        			<p class="description">'.__('Default value is 20 messages', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>
@@ -121,6 +126,14 @@ class FBSS_Admin {
 		echo '
 				</form>
 			</div>
+			<!-- /#wp-fb-social-stream-settings -->
+		';
+		
+		echo $this->getTemplateStreamInfoHTML();
+		
+		echo '
+		</div>
+		<!-- .wrap -->
 		';
 	}
 	
@@ -128,16 +141,16 @@ class FBSS_Admin {
 		$this->logger->log("initPageSettings.", __LINE__);
 		
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_setting_fb_page_name',
+							'fbss_setting_fb_page_name',
 							array($this, 'validateFBPageName'));
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_setting_fb_access_token',
+							'fbss_setting_fb_access_token',
 							array($this, 'validateFBAccessToken'));
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_settings_update_interval', 
+							'fbss_setting_update_interval', 
 							array($this, 'validateUpdateInterval'));
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_settings_msg_limit', 
+							'fbss_setting_msg_limit', 
 							array($this, 'validateMessageLimit'));
 		
 		// register template config settings
@@ -156,7 +169,7 @@ class FBSS_Admin {
 			$fb_page_name = $match[3];
 		}
 		
-		$stored_page_name = get_option('wp_fb_social_stream_setting_fb_page_name');
+		$stored_page_name = get_option('fbss_setting_fb_page_name');
 		if ($fb_page_name != $stored_page_name) {
 			$this->logger->log("FBPageName changed from '$stored_page_name' to ".
 					"'$fb_page_name'. Set update social stream flag.",
@@ -170,7 +183,7 @@ class FBSS_Admin {
 	public function validateFBAccessToken($input) {
 		$this->logger->log("Validation FBAccessToken '$input'.", __LINE__);
 	
-		$stored_token = get_option('wp_fb_social_stream_setting_fb_access_token');
+		$stored_token = get_option('fbss_setting_fb_access_token');
 		if ($input != $stored_token) {
 			$this->logger->log("FBAccessToken changed from '$stored_token' to ".
 					"'$input'. Set update social stream flag.",
@@ -190,7 +203,7 @@ class FBSS_Admin {
 		$this->logger->log("Validation message limit '$input'.", __LINE__);
 		
 		$limit = intval($input);
-		$stored_limit = get_option('wp_fb_social_stream_settings_msg_limit');
+		$stored_limit = get_option('fbss_setting_msg_limit');
 		if ($limit > $stored_limit) {
 			$this->logger->log("New message limit '$limit' is bigger than ".
 					"stored '$stored_limit'. Set update social stream flag.",
@@ -244,6 +257,10 @@ class FBSS_Admin {
 				$plugin_dir_url.'tools/colorpicker/css/colorpicker.css',
 				array(), '', 'all');
 			
+			wp_enqueue_style('wp-fb-social-stream-admin-font-awesome',
+				$plugin_dir_url.'templates/default/css/font-awesome-4.3.0/'.
+				'css/font-awesome.min.css', array(), '', 'all');
+			
 			wp_enqueue_style('wp-fb-social-stream-admin',
 				$plugin_dir_url.'css/admin.css',
 				array(), '', 'all');
@@ -263,6 +280,14 @@ class FBSS_Admin {
 			wp_enqueue_script('wp-fb-social-stream-colorpicker-admin',
 				$plugin_dir_url.'js/admin/colorpicker-fb-social-stream.js',
 				array('wp-fb-social-stream-colorpicker'), '', 'all');
+			
+			wp_enqueue_script('wp-fb-social-stream-admin-functions',
+				$plugin_dir_url.'js/admin/functions.js',
+				array('jquery'), '', 'all');
+			
+			wp_localize_script('wp-fb-social-stream-admin-functions',
+				'wp_fb_social_stream_js_vars',
+				array( 'ajaxurl' => admin_url('admin-ajax.php') ));
 		}
 	}
 	
@@ -334,13 +359,58 @@ class FBSS_Admin {
 				$html .= '
 						</td>
 					</tr>
-				';					
+				';
 			}
 		}
 		
 		$html .= '
 					<tbody>
 				</table>
+		';
+		
+		return $html;
+	}
+	
+	private function getTemplateStreamInfoHTML() {
+		$timestamp = get_option('fbss_setting_last_data_update');
+		$stream_update_timestamp = FBSS_TemplateStringUtils::getLocalTimestamp($timestamp);
+		
+		/* translators: date format, see http://php.net/date */
+		$stream_update_date_format = __('Y-m-d h:i:s a', 'wp-fb-social-stream');
+		$stream_update_date = date($stream_update_date_format, $stream_update_timestamp);
+		
+		$html = '
+			<!-- #wp-fb-social-stream-info-->
+			<div id="wp-fb-social-stream-info">
+				<div id="wp-fb-social-stream-last-update" class="wp-fb-social-stream-info-box">
+					<h3>'.__('Last stream update', 'wp-fb-social-stream').' <a href="#" onclick="updateSocialStream(); return false;" alt="'.__('update stream', 'wp-fb-social-stream').'" title="'.__('update stream', 'wp-fb-social-stream').'" id="wp-fb-social-stream-refresh"><i class="fa fa-refresh"></i></a></h3>
+					<p><i class="fa fa-clock-o"></i> <span id="wp-fb-social-stream-last-update-time">'.$stream_update_date.'</span></p>
+				</div>
+			
+				<div id="wp-fb-social-stream-contact" class="wp-fb-social-stream-info-box">
+					<h3>'.__('Interact', 'wp-fb-social-stream').'</h3>
+					<ul>
+						<li>'.__('Contact me for', 'wp-fb-social-stream').' 
+							<ul>
+								<li><a href="https://wordpress.org/support/plugin/facebook-social-stream" target="_blank"><i class="fa fa-ambulance"></i> '.__('support', 'wp-fb-social-stream').'</a></li>
+								<li><a href="https://wordpress.org/support/plugin/facebook-social-stream" target="_blank"><i class="fa fa-rocket"></i> '.__('new features', 'wp-fb-social-stream').'</a></li>
+							</ul>
+							'.__('I\'ll do my best!', 'wp-fb-social-stream').'</li>
+						<li class="wp-fb-social-stream-spacer">'.__('You like my work? Please', 'wp-fb-social-stream').'
+							<ul>
+								<li><a href="https://wordpress.org/support/view/plugin-reviews/facebook-social-stream" target="_blank"><i class="fa fa-star"></i> '.__('vote for me', 'wp-fb-social-stream').'</a></li>
+								<li>'.__('and tell your friends', 'wp-fb-social-stream').'</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+							
+				<div id="wp-fb-social-stream-donate" class="wp-fb-social-stream-info-box">
+					<h3>'.__('Donation', 'wp-fb-social-stream').'</h3>
+					<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLXKFHGZ9WWGN" target="_blank"><i class="fa fa-coffee"></i> '.__('Coffee', 'wp-fb-social-stream').'</a> '.__('is very appreciated', 'wp-fb-social-stream').' <i class="fa fa-smile-o"></i></p>
+				</div>
+			</div>
+			<!-- /#wp-fb-social-stream-info-->
 		';
 		
 		return $html;

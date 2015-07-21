@@ -5,6 +5,7 @@ require_once('FBSS_Facebook.php');
 require_once('FBSS_Logger.php');
 require_once('FBSS_Registry.php');
 require_once('FBSS_Template.php');
+require_once('FBSS_TemplateStringUtils.php');
 
 
 class FBSS_SocialStream {
@@ -38,7 +39,7 @@ class FBSS_SocialStream {
 				"'$page_name'.", __LINE__);
 		
 		$messages = $this->db->getByType('message', $limit);
-		
+
 		$social_stream_html = '';
 		$i = 1;
 		
@@ -63,14 +64,17 @@ class FBSS_SocialStream {
 				$msg_text = '';
 			}
 			
-			$msg_date_iso_8601 = date('Y-m-d', strtotime($msg_data_obj->created_time));
-			$msg_date_month = date('F', strtotime($msg_data_obj->created_time));
+			$msg_date_timestamp = strtotime($msg_data_obj->created_time);
+			$msg_date_timestamp_local = FBSS_TemplateStringUtils::getLocalTimestamp($msg_date_timestamp);
+			
+			$msg_date_iso_8601 = date('Y-m-d', $msg_date_timestamp_local);
+			$msg_date_month = date('F', $msg_date_timestamp_local);
 			$msg_date_month_translated = __($msg_date_month);
 			
 			/* translators: date format, see http://php.net/date */
 			$date_format = __('jS \of %\s Y h:i A', 'wp-fb-social-stream');
 			$msg_date_string = sprintf( 
-					date($date_format, strtotime($msg_data_obj->created_time)), 
+					date($date_format, $msg_date_timestamp_local), 
 					$msg_date_month_translated );
 			
 			
@@ -144,8 +148,16 @@ class FBSS_SocialStream {
 					}
 				}
 			} else if ($msg_type == 'video') {
-				# TODO add video player
-				continue;
+				$video_src = $msg_data_obj->source;
+				$video_name = '';
+				$video_description = '';
+				
+				if (property_exists($msg_data_obj, 'name')) {
+					$video_name = $msg_data_obj->name;
+				}
+				if (property_exists($msg_data_obj, 'description')) {
+					$video_description = $msg_data_obj->description;
+				}
 			}
 			
 			ob_start();

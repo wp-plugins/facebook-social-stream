@@ -131,3 +131,12 @@
 	left: -14px;
 	top: 9px;
 }
+
+/* video */
+.wp-fb-social-stream .fb-message-video {
+	padding: 0px 20px 20px 20px;
+}
+.wp-fb-social-stream .fb-message-video-name,
+.wp-fb-social-stream .fb-message-video-desc {
+	font-size: 11px;
+}

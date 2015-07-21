@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WordPress Plugin Facebook Social Stream\n"
-"POT-Creation-Date: 2015-07-20 15:58+0100\n"
-"PO-Revision-Date: 2015-07-20 15:58+0100\n"
+"POT-Creation-Date: 2015-07-21 12:49+0100\n"
+"PO-Revision-Date: 2015-07-21 12:51+0100\n"
 "Last-Translator: Daniel Anglileri\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -92,7 +92,7 @@ msgstr "Stream Anpassung"
 msgid "Optional style configuration of your social stream"
 msgstr "Optionales styling deines Social Streams"
 
-#: lib/FBSS_SocialStream.php:71
+#: lib/FBSS_SocialStream.php:83
 msgid "jS \\of %\\s Y h:i A"
 msgstr "\\a\\m d. %\\s Y \\u\\m H:i \\U\\h\\r"
 
@@ -104,8 +104,8 @@ msgstr "Nachrichten-Box"
 msgid "The main message box"
 msgstr "Die Haupt-Nachrichtenbox"
 
-#: templates/default/config.php:22 templates/default/config.php:61
-#: templates/default/config.php:77
+#: templates/default/config.php:22 templates/default/config.php:75
+#: templates/default/config.php:91
 msgid "Background color"
 msgstr "Farbe Hintergrund"
 
@@ -113,36 +113,77 @@ msgstr "Farbe Hintergrund"
 msgid "Border color"
 msgstr "Farbe Umrandung"
 
-#: templates/default/config.php:54
+#: templates/default/config.php:52
+msgid "Text color message date"
+msgstr "Farbe Datumstext"
+
+#: templates/default/config.php:59
+msgid "Text color message text"
+msgstr "Farbe Nachrichtentext"
+
+#: templates/default/config.php:68
 msgid "Meta-box"
 msgstr "Meta-Box"
 
-#: templates/default/config.php:55
+#: templates/default/config.php:69
 msgid "The meta-box contains the like and comment count"
 msgstr "Die Meta-Box enthält die Anzahl der Likes und Kommentare"
 
-#: templates/default/config.php:70
+#: templates/default/config.php:84
 msgid "Link-box"
 msgstr "Link-Box"
 
-#: templates/default/config.php:71
+#: templates/default/config.php:85
 msgid "Links inside the message-box are wrapped by the link-box"
 msgstr ""
 "Links innerhalb der Haupt-Nachrichtenbox werden von der Link-Box umgeben"
 
-#: templates/default/message.php:15
+#: templates/default/config.php:98
+msgid "Text color link name"
+msgstr "Farbe Linkname"
+
+#: templates/default/config.php:105
+msgid "Text color link description"
+msgstr "Farbe Linkbeschreibung"
+
+#: templates/default/config.php:112
+msgid "Text color link caption"
+msgstr "Farbe Linkuntertitel"
+
+#: templates/default/config.php:121
+msgid "Video-box"
+msgstr "Video-Box"
+
+#: templates/default/config.php:122
+msgid ""
+"The video-box contains the video itself and optional name and description"
+msgstr "Die Video-Box enthalt das Video und optional Name und Beschreibung"
+
+#: templates/default/config.php:128
+msgid "Text color name"
+msgstr "Farbe Name"
+
+#: templates/default/config.php:135
+msgid "Text color description"
+msgstr "Farbe Beschreibung"
+
+#: templates/default/message.php:18
 msgid "profile picture"
 msgstr "Profilbild"
 
-#: templates/default/message.php:35 templates/default/message.php:74
+#: templates/default/message.php:38 templates/default/message.php:68
 msgid "Link"
 msgstr "Link"
 
-#: templates/default/message.php:64
+#: templates/default/message.php:58
 msgid "Message image"
 msgstr "Nachrichtenbild"
 
-#: wp-fb-social-stream.php:144
+#: templates/default/message.php:99
+msgid "Your browser does not support the video tag."
+msgstr "Dein Browser unterstützt leider das HTML5 video tag nicht"
+
+#: wp-fb-social-stream.php:145
 msgid "Settings"
 msgstr "Einstellungen"
 

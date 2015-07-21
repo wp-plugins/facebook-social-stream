@@ -5,6 +5,9 @@
  * 	You can create your own template in 
  * 	templates/{your-template-name}/message.php
  */
+
+require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php');
+
 ?>
 
 	<!-- .fb-message -->
@@ -43,20 +46,8 @@
 					// escape external data first...
 					$msg_text = esc_html($msg_text);
 					
-					// ...then create html links
-					$search = '/(https?:\/\/(.+?))(\s|$|\n)/i';
-					$replace = '<a href="$1" rel="nofollow" target="_blank">$1</a> ';
-					$msg_text = preg_replace($search, $replace, $msg_text);
-					
-					// ... and replace hashtags
-					$search = '/([^&]#(.+?))(\s|$|\n|,|\.)/i';
-					$replace = ' <a href="https://www.facebook.com/hashtag/$2" rel="nofollow" target="_blank">#$2</a> ';
-					$msg_text = preg_replace($search, $replace, $msg_text);
-					
-					// replace \n with html line breaks
-					$msg_text = preg_replace('/\n/', '<br />', $msg_text);
-					
-					echo $msg_text;
+					// ...then create html output of JSON data
+					echo FBSS_TemplateStringUtils::createMessageHTML($msg_text);
 				?>
 			</div>
 			<?php endif; ?>
@@ -99,7 +90,31 @@
 			</div>
 			<!-- /.fb-message-linkbox -->
 			<?php endif; ?>
-
+			
+			<?php if ($msg_type == 'video' && $video_src) : ?>
+			<!-- .fb-message-video -->
+			<div class="fb-message-video">
+				<video controls>
+  					<source src="<?php echo esc_html($video_src); ?>" type="video/mp4">
+					<?php _e('Your browser does not support the video tag.', 'wp-fb-social-stream'); ?>
+				</video>
+				<div class="fb-message-video-metadata">
+					<?php if ($video_name) : ?>
+					<div class="fb-message-video-name"><?php echo esc_html($video_name); ?></div>
+					<?php endif; ?>
+					
+					<?php if ($video_description) : ?>
+					<div class="fb-message-video-desc">
+						<?php 
+							$video_description = esc_html($video_description);
+							echo FBSS_TemplateStringUtils::createMessageHTML($video_description);
+						?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+			<!-- /.fb-message-video -->
+			<?php endif; ?>
 		</div>
 		<!-- /.fb-message-wrap -->
 		

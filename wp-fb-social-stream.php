@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Facebook Social Stream
-Plugin URI: http://angileri.de/blog/wordpress-plugin-facebook-social-stream/
+Plugin URI: http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-stream/
 Description: Reads facebook page data and provides social stream
 Author: Daniele Angileri <daniele@angileri.det>
 Author URI: http://angileri.de
-Version: 1.3.2
+Version: 1.3.3
 Text Domain: wp-fb-social-stream
 License: GPLv2
 
@@ -35,13 +35,14 @@ require_once('lib/FBSS_Registry.php');
 require_once('lib/FBSS_Shortcodes.php');
 require_once('lib/FBSS_SocialStream.php');
 require_once('lib/FBSS_Template.php');
+require_once('lib/FBSS_Update.php');
 
 
 class WP_FB_SocialStream {
 	
-	private static $plugin_name = 'WP FB Social Stream';
-	private static $plugin_version = '1.3.2';
-	private static $plugin_version_key = 'wp_fb_social_stream_plugin_version';
+	private static $plugin_name = 'Facebook Social Stream';
+	private static $plugin_version = '1.3.3';
+	private static $plugin_version_key = 'fbss_plugin_version';
 	
 	private static $logger;
 	private static $db;
@@ -51,9 +52,9 @@ class WP_FB_SocialStream {
 	
 	
 	public static function register() {
-		$fb_page_name = get_option('wp_fb_social_stream_setting_fb_page_name');
-		$fb_access_token = get_option('wp_fb_social_stream_setting_fb_access_token');
-		self::$stream_msg_limit = get_option('wp_fb_social_stream_settings_msg_limit', 20);
+		$fb_page_name = get_option('fbss_setting_fb_page_name');
+		$fb_access_token = get_option('fbss_setting_fb_access_token');
+		self::$stream_msg_limit = get_option('fbss_setting_msg_limit', 20);
 		
 		// init registry with plugin data first
 		FBSS_Registry::set('plugin_name', self::$plugin_name);
@@ -120,11 +121,11 @@ class WP_FB_SocialStream {
 		self::$logger->log("Plugin uninstallation.", __LINE__);
 		self::$db->drop();
 		delete_option(self::$plugin_version_key);
-		delete_option('wp_fb_social_stream_setting_fb_page_name');
-		delete_option('wp_fb_social_stream_setting_fb_access_token');
-		delete_option('wp_fb_social_stream_settings_update_interval');
-		delete_option('wp_fb_social_stream_settings_last_data_update');
-		delete_option('wp_fb_social_stream_settings_msg_limit');
+		delete_option('fbss_setting_fb_page_name');
+		delete_option('fbss_setting_fb_access_token');
+		delete_option('fbss_setting_update_interval');
+		delete_option('fbss_setting_last_data_update');
+		delete_option('fbss_setting_msg_limit');
 		
 		# delete template-customization data
 		$all_options = wp_load_alloptions();
@@ -150,14 +151,14 @@ class WP_FB_SocialStream {
 	public static function ajaxUpdateSocialStream() {
 		self::$logger->log("ajaxUpdateSocialStream.", __LINE__);
 		
-		$update_interval = get_option('wp_fb_social_stream_settings_update_interval',
+		$update_interval = get_option('fbss_setting_update_interval',
 							30);
 		
 		# check last update and decide whether to run store or not
-		$last_update_time = get_option('wp_fb_social_stream_settings_last_data_update');
+		$last_update_time = get_option('fbss_setting_last_data_update');
 		if (!$last_update_time) {
 			$last_update_time = time();
-			add_option('wp_fb_social_stream_settings_last_data_update', 
+			add_option('fbss_setting_last_data_update', 
 						$last_update_time);
 		}
 		
@@ -171,7 +172,7 @@ class WP_FB_SocialStream {
 			$social_stream = new FBSS_SocialStream;
 			$social_stream->store();
 			
-			update_option('wp_fb_social_stream_settings_last_data_update', time());
+			update_option('fbss_setting_last_data_update', time());
 			
 			# print updated social stream as ajax return value
 			echo $social_stream->get(self::$stream_msg_limit);
@@ -210,6 +211,7 @@ class WP_FB_SocialStream {
 				update_option($plugin_version_key, $cur_version);
 			}
 		} else {
+			self::updateTasks($prev_version); // option name could have changed
 			add_option($plugin_version_key, $cur_version);
 			self::$logger->log("Plugin version '$cur_version' registered.",
 					__LINE__);
@@ -222,7 +224,8 @@ class WP_FB_SocialStream {
 		self::$logger->log("Checking update tasks '$prev_version' -> ".
 				"'$cur_version'.", __LINE__);
 		
-		# implement update tasks here as soon as there exists some 
+		$update = new FBSS_Update;
+		$update->update($prev_version, $cur_version);
 	}
 	
 	private static function initTemplate() {

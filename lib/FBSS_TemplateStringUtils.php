@@ -27,4 +27,14 @@ class FBSS_TemplateStringUtils {
 	public static function createHTMLLineBreaks($txt) {
 		return preg_replace('/\n/', '<br />', $txt);
 	}
+	
+	public static function getLocalTimestamp($timestamp) {
+		$gmt_offset = get_option('gmt_offset', 0);
+		$gmt_offset_string = sprintf("%s hours", $gmt_offset);
+		if (preg_match('/^(-?\d+)\.5/', $gmt_offset, $result)) {
+			$gmt_offset_string = sprintf("%s hours 30 minutes", $result[1]);
+		}
+		
+		return strtotime($gmt_offset_string, $timestamp);
+	}
 }

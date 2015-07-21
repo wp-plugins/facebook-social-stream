@@ -1,9 +1,10 @@
 === Facebook Social Stream ===
 Contributors: Daniele Angileri
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLXKFHGZ9WWGN
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,8 +29,7 @@ It would be nice to contact me if you have troubles before you leave a bad ratin
 
 = Contact =
 * [Check for more information here](http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-stream/)
-* [Get free help from me here](http://angileri.de/#contact)
-* [Forums](https://wordpress.org/support/plugin/facebook-social-stream)
+* [Get free support from me here](https://wordpress.org/support/plugin/facebook-social-stream)
 
 
 = Philosophy =
@@ -39,13 +39,14 @@ It would be nice to contact me if you have troubles before you leave a bad ratin
 
 
 = Features =
-* Easy to add via shortcode `[fb_social_stream]`
-* Customizable appearance without CSS knowledge
-* Responsive behaviour
-* Crawlable by search engine bots
-* Fast delivery by caching
+* Easy to add via **shortcode** `[fb_social_stream]`
+* **Customizable** appearance without CSS knowledge
+* **Responsive** behaviour
+* **Crawlable** by search engine bots
+* Fast delivery by **caching**
 * HTML-links of Hashtags
 * HTML-links of message URLs
+* modern **HTML5 video** delivery
 
 
 == Installation ==
@@ -79,6 +80,10 @@ In order to read Facebook data via the Facebook Graph API you need to authentica
 = Can I change the appearance of the stream? =
 **Yes**. You can simply change the style of your stream within the plugin-settings. A color-picker supports you to find the right color hue easily.
 
+= Does the stream also deliver Facebook videos? =
+**Yes**. Facebook videos are delivered as modern HTML5 videos.
+I did not use Flash on purpose. Many mobile phones do not support it and it will die anyway on the long run. 
+
 
 == Screenshots ==
 1. Plugin configuration
@@ -86,6 +91,10 @@ In order to read Facebook data via the Facebook Graph API you need to authentica
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+
+= 1.3.4 =
+* Show last stream-update time on settings page
+* Update stream manually via settings page
 
 = 1.3.3 =
 * Added video messages as HTML5 video player (Flash dies anyway)

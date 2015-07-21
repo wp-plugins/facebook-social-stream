@@ -1,4 +1,45 @@
+.wp-fb-social-stream-spacer {
+	margin-top:25px;
+}
 .wp-fb-social-stream-customization th {
 	padding-top: 40px;
 	padding-bottom: 0px;
+}
+
+#wp-fb-social-stream-settings {
+	float: left;
+	width: 80%;
+}
+#wp-fb-social-stream-info {
+	float: right;
+	margin-left: 2%;
+	width: 17%;
+}
+#wp-fb-social-stream-info .wp-fb-social-stream-info-box {
+	background-color: #fff;
+	border: 2px solid #bbb;
+	padding-left: 25px;
+	margin-bottom: 30px;
+}
+#wp-fb-social-stream-info .wp-fb-social-stream-info-box ul li ul li {
+	padding-left: 20px;
+}
+
+#wp-fb-social-stream-info .wp-fb-social-stream-info-box .fa-coffee {
+	font-size: 18px;
+}
+
+@-webkit-keyframes blink {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+#wp-fb-social-stream-info .blink {
+    -webkit-animation-name: blink;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    -webkit-animation-duration: 1s;
 }

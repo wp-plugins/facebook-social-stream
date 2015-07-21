@@ -5,7 +5,7 @@ Plugin URI: http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-str
 Description: Reads facebook page data and provides social stream
 Author: Daniele Angileri <daniele@angileri.det>
 Author URI: http://angileri.de
-Version: 1.3.3
+Version: 1.3.4
 Text Domain: wp-fb-social-stream
 License: GPLv2
 
@@ -35,13 +35,14 @@ require_once('lib/FBSS_Registry.php');
 require_once('lib/FBSS_Shortcodes.php');
 require_once('lib/FBSS_SocialStream.php');
 require_once('lib/FBSS_Template.php');
+require_once('lib/FBSS_TemplateStringUtils.php');
 require_once('lib/FBSS_Update.php');
 
 
 class WP_FB_SocialStream {
 	
 	private static $plugin_name = 'Facebook Social Stream';
-	private static $plugin_version = '1.3.3';
+	private static $plugin_version = '1.3.4';
 	private static $plugin_version_key = 'fbss_plugin_version';
 	
 	private static $logger;
@@ -100,6 +101,8 @@ class WP_FB_SocialStream {
 						array(__CLASS__, 'ajaxUpdateSocialStream'));
 		add_action('wp_ajax_nopriv_wp_fb_social_stream_update', 
 						array(__CLASS__, 'ajaxUpdateSocialStream'));
+		add_action('wp_ajax_wp_fb_social_stream_force_update',
+						array(__CLASS__, 'ajaxForceUpdateSocialStream'));
 		
 		/* register javascript libraries */
 		FBSS_JS::register();
@@ -169,10 +172,10 @@ class WP_FB_SocialStream {
 			self::$logger->log("Update interval of '$update_interval' mins ".
 					"reached ($diff_time_mins). Updating.", __LINE__);
 			
+			update_option('fbss_setting_last_data_update', time());
+			
 			$social_stream = new FBSS_SocialStream;
 			$social_stream->store();
-			
-			update_option('fbss_setting_last_data_update', time());
 			
 			# print updated social stream as ajax return value
 			echo $social_stream->get(self::$stream_msg_limit);
@@ -183,6 +186,24 @@ class WP_FB_SocialStream {
 			echo '';
 		}
 		
+		wp_die(); // as described in codex: this is required to terminate immediately
+	}
+	
+	public static function ajaxForceUpdateSocialStream() {
+		self::$logger->log("ajaxForceUpdateSocialStream.", __LINE__);
+		
+		$timestamp = time();
+		
+		update_option('fbss_setting_last_data_update', $timestamp);
+		
+		$social_stream = new FBSS_SocialStream;
+		$social_stream->store();
+		
+		$stream_update_timestamp = FBSS_TemplateStringUtils::getLocalTimestamp($timestamp);
+		$stream_update_date_format = __('Y-m-d h:i:s a', 'wp-fb-social-stream');
+		$stream_update_date = date($stream_update_date_format, $stream_update_timestamp);
+		
+		echo $stream_update_date;
 		wp_die(); // as described in codex: this is required to terminate immediately
 	}
 	

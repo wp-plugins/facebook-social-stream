@@ -46,7 +46,21 @@ $template_config = array(
 								'value_suffix'	=> ''
 							)
 						)
-					)
+					),
+					array(
+						'config_id'		=> 5,
+						'desc'			=> __('Text color message date', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-message-wrap .fb-message-date',
+						'property'		=> 'color',
+						'type'			=> 'hexcode'
+					),
+					array(
+						'config_id'		=> 6,
+						'desc'			=> __('Text color message text', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-message-wrap .fb-message-text',
+						'property'		=> 'color',
+						'type'			=> 'hexcode'
+					),
 				)
 			)
 		),
@@ -78,6 +92,50 @@ $template_config = array(
 						'selector' 		=> '.wp-fb-social-stream .fb-message-linkbox',
 						'property'		=> 'background-color',
 						'type'			=> 'hexcode'
+					),
+					array(
+						'config_id'		=> 2,
+						'desc'			=> __('Text color link name', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-message-linkbox .fb-message-linkbox-name',
+						'property'		=> 'color',
+						'type'			=> 'hexcode'
+					),
+					array(
+						'config_id'		=> 3,
+						'desc'			=> __('Text color link description', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-message-linkbox .fb-message-linkbox-desc',
+						'property'		=> 'color',
+						'type'			=> 'hexcode'
+					),
+					array(
+						'config_id'		=> 4,
+						'desc'			=> __('Text color link caption', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-message-linkbox .fb-message-linkbox-caption',
+						'property'		=> 'color',
+						'type'			=> 'hexcode'
+					)
+				)
+			)
+		),
+		array(
+			'name'		=> __('Video-box', 'wp-fb-social-stream'),
+			'desc'		=> __('The video-box contains the video itself and optional name and description', 'wp-fb-social-stream'),
+			'config'	=> array(
+				'index'		=> 'video_box',
+				'configs'	=> array(
+					array(
+							'config_id'		=> 1,
+							'desc'			=> __('Text color name', 'wp-fb-social-stream'),
+							'selector' 		=> '.wp-fb-social-stream .fb-message-video-name',
+							'property'		=> 'color',
+							'type'			=> 'hexcode'
+					),
+					array(
+							'config_id'		=> 2,
+							'desc'			=> __('Text color description', 'wp-fb-social-stream'),
+							'selector' 		=> '.wp-fb-social-stream .fb-message-video-desc',
+							'property'		=> 'color',
+							'type'			=> 'hexcode'
 					)
 				)
 			)

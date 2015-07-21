@@ -62,19 +62,19 @@ class FBSS_Admin {
 						<tbody>
 				        	<tr>
 				        		<th scope="row">
-				        			<label for="wp_fb_social_stream_setting_fb_page_name">'.__('Facebook Page Name', 'wp-fb-social-stream').'</label>
+				        			<label for="fbss_setting_fb_page_name">'.__('Facebook Page Name', 'wp-fb-social-stream').'</label>
 				        		</th>
 				        		<td>
-				        			<input type="text" name="wp_fb_social_stream_setting_fb_page_name" value="'.esc_attr( get_option('wp_fb_social_stream_setting_fb_page_name') ).'" class="regular-text" />
+				        			<input type="text" name="fbss_setting_fb_page_name" value="'.esc_attr( get_option('fbss_setting_fb_page_name') ).'" class="regular-text" />
 				        			<p class="description">'.__('You can idintify the page-name as follows: https://www.facebook.com/{<strong>page-name</strong>}', 'wp-fb-social-stream').'</p>
 				        		</td>
 				        	</tr>
 							<tr>
 								<th scope="row">
-									<label for="wp_fb_social_stream_setting_fb_access_token">'.__('Facebook Access Token', 'wp-fb-social-stream').'</label>
+									<label for="fbss_setting_fb_access_token">'.__('Facebook Access Token', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_setting_fb_access_token" value="'.esc_attr( get_option('wp_fb_social_stream_setting_fb_access_token') ).'" class="regular-text" /> ('.__('optional', 'wp-fb-social-stream').')
+						        	<input type="text" name="fbss_setting_fb_access_token" value="'.esc_attr( get_option('fbss_setting_fb_access_token') ).'" class="regular-text" /> ('.__('optional', 'wp-fb-social-stream').')
 						        	<p class="description">'.__('Either use your own one with specific rights or leave it empty to use the plugin-default', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>
@@ -92,19 +92,19 @@ class FBSS_Admin {
 						<tbody>	
 		        			<tr>
 								<th scope="row">
-									<label for="wp_fb_social_stream_settings_update_interval">'.__('Update interval', 'wp-fb-social-stream').'</label>
+									<label for="fbss_setting_update_interval">'.__('Update interval', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_settings_update_interval" value="'.esc_attr( get_option('wp_fb_social_stream_settings_update_interval', 30) ).'" class="regular-text" /> ('.__('minutes', 'wp-fb-social-stream').')
+						        	<input type="text" name="fbss_setting_update_interval" value="'.esc_attr( get_option('fbss_setting_update_interval', 30) ).'" class="regular-text" /> ('.__('minutes', 'wp-fb-social-stream').')
 						        	<p class="description">'.__('Default value is 30 minutes', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>
 		        			<tr>
 								<th scope="row">
-									<label for="wp_fb_social_stream_settings_msg_limit">'.__('Max messages', 'wp-fb-social-stream').'</label>
+									<label for="fbss_setting_msg_limit">'.__('Max messages', 'wp-fb-social-stream').'</label>
 								</th>
 						        <td>
-						        	<input type="text" name="wp_fb_social_stream_settings_msg_limit" value="'.esc_attr( get_option('wp_fb_social_stream_settings_msg_limit', 20) ).'" class="regular-text" />
+						        	<input type="text" name="fbss_setting_msg_limit" value="'.esc_attr( get_option('fbss_setting_msg_limit', 20) ).'" class="regular-text" />
 				        			<p class="description">'.__('Default value is 20 messages', 'wp-fb-social-stream').'</p>
 					        	</td>
 							</tr>
@@ -128,16 +128,16 @@ class FBSS_Admin {
 		$this->logger->log("initPageSettings.", __LINE__);
 		
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_setting_fb_page_name',
+							'fbss_setting_fb_page_name',
 							array($this, 'validateFBPageName'));
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_setting_fb_access_token',
+							'fbss_setting_fb_access_token',
 							array($this, 'validateFBAccessToken'));
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_settings_update_interval', 
+							'fbss_setting_update_interval', 
 							array($this, 'validateUpdateInterval'));
 		register_setting('wp-fb-social-stream-settings-group', 
-							'wp_fb_social_stream_settings_msg_limit', 
+							'fbss_setting_msg_limit', 
 							array($this, 'validateMessageLimit'));
 		
 		// register template config settings
@@ -156,7 +156,7 @@ class FBSS_Admin {
 			$fb_page_name = $match[3];
 		}
 		
-		$stored_page_name = get_option('wp_fb_social_stream_setting_fb_page_name');
+		$stored_page_name = get_option('fbss_setting_fb_page_name');
 		if ($fb_page_name != $stored_page_name) {
 			$this->logger->log("FBPageName changed from '$stored_page_name' to ".
 					"'$fb_page_name'. Set update social stream flag.",
@@ -170,7 +170,7 @@ class FBSS_Admin {
 	public function validateFBAccessToken($input) {
 		$this->logger->log("Validation FBAccessToken '$input'.", __LINE__);
 	
-		$stored_token = get_option('wp_fb_social_stream_setting_fb_access_token');
+		$stored_token = get_option('fbss_setting_fb_access_token');
 		if ($input != $stored_token) {
 			$this->logger->log("FBAccessToken changed from '$stored_token' to ".
 					"'$input'. Set update social stream flag.",
@@ -190,7 +190,7 @@ class FBSS_Admin {
 		$this->logger->log("Validation message limit '$input'.", __LINE__);
 		
 		$limit = intval($input);
-		$stored_limit = get_option('wp_fb_social_stream_settings_msg_limit');
+		$stored_limit = get_option('fbss_setting_msg_limit');
 		if ($limit > $stored_limit) {
 			$this->logger->log("New message limit '$limit' is bigger than ".
 					"stored '$stored_limit'. Set update social stream flag.",

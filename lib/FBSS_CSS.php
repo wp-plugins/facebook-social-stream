@@ -8,7 +8,6 @@ class FBSS_CSS {
 	
 	private static $logger;
 	private static $plugin_dir_url;
-	private static $version = '1.1.0';
 	
 	public static function register() {
 		self::$logger = new FBSS_Logger(__CLASS__);
@@ -23,18 +22,20 @@ class FBSS_CSS {
 		$template = new FBSS_Template;
 		$template_name = $template->getName();
 		
+		$plugin_version = FBSS_Registry::get('plugin_version');
+		
 		$style_dir = self::$plugin_dir_url.'templates/'.$template_name.'/css';
 		$style_uri = $style_dir.'/style.css';
 		
 		if ($template_name == 'default') {
 			wp_enqueue_style('font-awesome', $style_dir.'/font-awesome-4.3.0/'.
-				'css/font-awesome.min.css', array(), self::$version, 'all');
+				'css/font-awesome.min.css', array(), $plugin_version, 'all');
 			
 			wp_enqueue_style('wp-fb-social-stream', $style_uri, 
-				array('font-awesome'), self::$version, 'all');
+				array('font-awesome'), $plugin_version, 'all');
 		} else {
 			wp_enqueue_style('wp-fb-social-stream', $style_uri, array(),
-				self::$version, 'all');
+				$plugin_version, 'all');
 		}
 		
 		// enqueue customized style

@@ -5,6 +5,7 @@ require_once('FBSS_Facebook.php');
 require_once('FBSS_Logger.php');
 require_once('FBSS_Registry.php');
 require_once('FBSS_Template.php');
+require_once('FBSS_TemplateStringUtils.php');
 
 
 class FBSS_SocialStream {
@@ -39,13 +40,6 @@ class FBSS_SocialStream {
 		
 		$messages = $this->db->getByType('message', $limit);
 
-		// handle date offset
-		$gmt_offset = get_option('gmt_offset', 0);
-		$gmt_offset_string = sprintf("%s hours", $gmt_offset);
-		if (preg_match('/^(-?\d+)\.5/', $gmt_offset, $result)) {
-			$gmt_offset_string = sprintf("%s hours 30 minutes", $result[1]);
-		}
-		
 		$social_stream_html = '';
 		$i = 1;
 		
@@ -70,10 +64,8 @@ class FBSS_SocialStream {
 				$msg_text = '';
 			}
 			
-			
 			$msg_date_timestamp = strtotime($msg_data_obj->created_time);
-			$msg_date_timestamp_local = strtotime($gmt_offset_string, 
-											$msg_date_timestamp);
+			$msg_date_timestamp_local = FBSS_TemplateStringUtils::getLocalTimestamp($msg_date_timestamp);
 			
 			$msg_date_iso_8601 = date('Y-m-d', $msg_date_timestamp_local);
 			$msg_date_month = date('F', $msg_date_timestamp_local);

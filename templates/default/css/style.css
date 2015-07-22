@@ -133,10 +133,63 @@
 }
 
 /* video */
+.wp-fb-social-stream .fb-message-video video {
+	width: 100%;		
+}
 .wp-fb-social-stream .fb-message-video {
 	padding: 0px 20px 20px 20px;
 }
 .wp-fb-social-stream .fb-message-video-name,
 .wp-fb-social-stream .fb-message-video-desc {
-	font-size: 11px;
+	font-size: smaller;
+}
+
+.wp-fb-social-stream .fb-message-video-linkbox {
+	padding: 20px;
+	margin-bottom: 10px;
+	
+	background-color: #FAFAFA;
+	
+	-moz-box-shadow:    1px 1px 6px #848484;
+	-webkit-box-shadow: 1px 1px 6px #848484;
+	box-shadow:         1px 1px 6px #848484;
+	
+}
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-img-wrapper {
+	cursor: pointer;
+	float: left;
+	width: 20%;
+}
+
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-img {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-img img {
+	max-width: 100%;
+	height: auto;
+}
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-img .fa-play-circle {
+	color: #fff;
+	font-size: 40px;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	bottom: 0;
+	right: 0;
+	opacity: 0.7;
+}
+
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-img .fa-play-circle:hover {
+	opacity: 0.85;
+}
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-txt {
+	float: right;
+	margin-left: 5%;
+	width: 75%;
+}
+.wp-fb-social-stream .fb-message-video-linkbox .fb-message-video-name {
+	font-size: inherit;
+	font-weight: bold;
 }

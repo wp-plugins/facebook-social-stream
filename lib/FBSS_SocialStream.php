@@ -55,6 +55,7 @@ class FBSS_SocialStream {
 			#$this->logger->log("Message: ".print_r($messages, true), __LINE__);
 			
 			$msg_type = $msg_data_obj->type;
+			$msg_status_type = $msg_data_obj->status_type;
 			
 			$msg_share_link = $this->getShareLinkFromJSON($msg_obj_id, $msg_data_obj, $msg_type);
 			
@@ -78,24 +79,15 @@ class FBSS_SocialStream {
 					$msg_date_month_translated );
 			
 			
-			# read likes and comments from DB
+			# read likes and comments
 			$msg_likes = 0;
 			$msg_comments = 0;
 			
-			$likes_summary = $this->db->get($msg_obj_id, 'likes_summary');
-			if ($likes_summary) {
-				$likes_summary_json = $likes_summary->data;
-				$likes_summary_data_obj = json_decode($likes_summary_json);
-					
-				$msg_likes = $likes_summary_data_obj->likes->summary->total_count;				
+			if (property_exists($msg_data_obj, 'likes')) {
+				$msg_likes = $msg_data_obj->likes->summary->total_count;				
 			}
-			
-			$comments_summary = $this->db->get($msg_obj_id, 'comments_summary');
-			if ($comments_summary) {
-				$comments_summary_json = $comments_summary->data;
-				$comments_summary_data_obj = json_decode($comments_summary_json);
-				
-				$msg_comments = $comments_summary_data_obj->comments->summary->total_count;				
+			if (property_exists($msg_data_obj, 'comments')) {
+				$msg_comments = $msg_data_obj->comments->summary->total_count;
 			}
 			
 			# handle message types
@@ -109,6 +101,10 @@ class FBSS_SocialStream {
 			$link_name = '';
 			$link_caption = '';
 			$link_description = '';
+			
+			$video_src = '';
+			$video_name = '';
+			$video_description = '';
 			
 			if ($msg_type == 'photo') {
 				if (property_exists($msg_data_obj, 'object_id')) {
@@ -149,15 +145,14 @@ class FBSS_SocialStream {
 				}
 			} else if ($msg_type == 'video') {
 				$video_src = $msg_data_obj->source;
-				$video_name = '';
-				$video_description = '';
+				$video_img = $msg_data_obj->picture;
 				
 				if (property_exists($msg_data_obj, 'name')) {
 					$video_name = $msg_data_obj->name;
 				}
 				if (property_exists($msg_data_obj, 'description')) {
 					$video_description = $msg_data_obj->description;
-				}
+				}					
 			}
 			
 			ob_start();
@@ -219,22 +214,6 @@ class FBSS_SocialStream {
 			$this->db->insert($message_id, 'message', $message_json,
 				$objMessage->created_time, $objMessage->updated_time);
 
-			// save like count to MySQL DB
-			$like_count_json = $this->getLikeCount($message_id);
-			if ($like_count_json === false) {
-				continue;
-			}
-			$this->db->insert($message_id, 'likes_summary', $like_count_json,
-					$objMessage->created_time, $objMessage->updated_time);
-			
-			// save comment count to MySQL DB
-			$comment_count_json = $this->getCommentCount($message_id);
-			if ($comment_count_json === false) {
-				continue;
-			}
-			$this->db->insert($message_id, 'comments_summary', $comment_count_json,
-					$objMessage->created_time, $objMessage->updated_time);
-			
 			if ($message_type == 'photo') {
 				$object_id = $objMessage->object_id;
 				
@@ -348,30 +327,6 @@ class FBSS_SocialStream {
 		}
 		
 		return $image_json;
-	}
-	
-	private function getLikeCount($message_id) {
-		$this->logger->log("Get like count with id '$message_id'.", __LINE__);
-		$like_count_json = $this->facebook->getLikeCount($message_id);
-		if ($like_count_json === false) {
-			$this->logger->log("Could not retrieve like count with id ".
-					"'$message_id'!", __LINE__, true);
-			return false;
-		}
-		
-		return $like_count_json;
-	}
-	
-	private function getCommentCount($message_id) {
-		$this->logger->log("Get comment count with id '$message_id'.", __LINE__);
-		$comment_count_json = $this->facebook->getCommentCount($message_id);
-		if ($comment_count_json === false) {
-			$this->logger->log("Could not retrieve like count with id ".
-					"'$message_id'!", __LINE__, true);
-			return false;
-		}
-	
-		return $comment_count_json;
 	}
 	
 	private function getShareLinkFromJSON($msg_obj_id, $objMessage, $msg_type) {

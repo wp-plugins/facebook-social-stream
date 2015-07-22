@@ -124,6 +124,13 @@ $template_config = array(
 				'index'		=> 'video_box',
 				'configs'	=> array(
 					array(
+							'config_id'		=> 3,
+							'desc'			=> __('Background color', 'wp-fb-social-stream'),
+							'selector' 		=> '.wp-fb-social-stream .fb-message-video-linkbox',
+							'property'		=> 'background-color',
+							'type'			=> 'hexcode'
+					),
+					array(
 							'config_id'		=> 1,
 							'desc'			=> __('Text color name', 'wp-fb-social-stream'),
 							'selector' 		=> '.wp-fb-social-stream .fb-message-video-name',

@@ -94,6 +94,7 @@ require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php'
 			<?php if ($msg_type == 'video' && $video_src) : ?>
 			<!-- .fb-message-video -->
 			<div class="fb-message-video">
+				<?php if ($msg_status_type == 'added_video') : ?>
 				<video controls>
   					<source src="<?php echo esc_html($video_src); ?>" type="video/mp4">
 					<?php _e('Your browser does not support the video tag.', 'wp-fb-social-stream'); ?>
@@ -109,9 +110,34 @@ require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php'
 							$video_description = esc_html($video_description);
 							echo FBSS_TemplateStringUtils::createMessageHTML($video_description);
 						?>
-						</div>
+					</div>
 					<?php endif; ?>
 				</div>
+				<?php else : ?>
+				<div class="fb-message-video-linkbox">
+					<div class="fb-message-video-img-wrapper" onclick="window.open('<?php echo esc_html($msg_share_link); ?>', '_blank'); return false;">
+						<div class="fb-message-video-img">
+							<img src="<?php echo esc_html($video_img); ?>" alt="" />
+							<i class="fa fa-play-circle"></i>
+						</div>
+					</div>
+					<div class="fb-message-video-txt">
+						<?php if ($video_name) : ?>
+						<div class="fb-message-video-name"><?php echo esc_html($video_name); ?></div>
+						<?php endif; ?>
+						
+						<?php if ($video_description) : ?>
+						<div class="fb-message-video-desc">
+							<?php 
+								$video_description = esc_html($video_description);
+								echo FBSS_TemplateStringUtils::createMessageHTML($video_description);
+							?>
+						</div>
+					</div>
+					<div class="clearer"></div>
+					<?php endif; ?>
+				</div>
+				<?php endif; ?>
 			</div>
 			<!-- /.fb-message-video -->
 			<?php endif; ?>

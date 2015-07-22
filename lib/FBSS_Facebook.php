@@ -6,6 +6,7 @@ require_once('FBSS_Registry.php');
 
 class FBSS_Facebook {
 	
+	const FB_GRAPH_VERSION = 'v2.4';
 	const FB_GRAPH_URI = 'https://graph.facebook.com';
 	const FALLBACK_GRAPH_URI = 'http://angileri.de/rest/facebook';
 	
@@ -22,7 +23,8 @@ class FBSS_Facebook {
 		$this->logger->log("getFBPageID by page-name '$page_name'.", __LINE__);
 		
 		if ($this->access_token) {
-			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.$page_name.
+			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.
+					self::FB_GRAPH_VERSION.'/'.$page_name.
 					'?access_token='.$this->access_token);
 		} else {
 			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$page_name);

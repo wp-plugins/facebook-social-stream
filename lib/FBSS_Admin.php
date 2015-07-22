@@ -251,19 +251,20 @@ class FBSS_Admin {
 		if ($hook == 'settings_page_'.$this->menu_slug) {
 			$this->logger->log("addCSSLibraries.", __LINE__);
 			
+			$plugin_version = FBSS_Registry::get('plugin_version');
 			$plugin_dir_url = FBSS_Registry::get('plugin_base_dir_url');
 			
 			wp_enqueue_style('wp-fb-social-stream-colorpicker',
 				$plugin_dir_url.'tools/colorpicker/css/colorpicker.css',
-				array(), '', 'all');
+				array(), $plugin_version, 'all');
 			
 			wp_enqueue_style('wp-fb-social-stream-admin-font-awesome',
 				$plugin_dir_url.'templates/default/css/font-awesome-4.3.0/'.
-				'css/font-awesome.min.css', array(), '', 'all');
+				'css/font-awesome.min.css', array(), $plugin_version, 'all');
 			
 			wp_enqueue_style('wp-fb-social-stream-admin',
 				$plugin_dir_url.'css/admin.css',
-				array(), '', 'all');
+				array(), $plugin_version, 'all');
 		}
 	}
 	

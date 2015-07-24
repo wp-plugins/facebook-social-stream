@@ -11,12 +11,14 @@ class FBSS_Facebook {
 	const FALLBACK_GRAPH_URI = 'http://angileri.de/rest/facebook';
 	
 	private $access_token;
+	private $plugin_version;
 	private $logger;
 	
 	
 	public function __construct() {
 		$this->logger = new FBSS_Logger(__CLASS__);
 		$this->access_token = FBSS_Registry::get('fb_access_token');
+		$this->plugin_version = FBSS_Registry::get('plugin_version');
 	}
 	
 	public function getFBPageID ($page_name) {
@@ -24,10 +26,11 @@ class FBSS_Facebook {
 		
 		if ($this->access_token) {
 			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.
-					self::FB_GRAPH_VERSION.'/'.$page_name.
-					'?access_token='.$this->access_token);
+						self::FB_GRAPH_VERSION.'/'.$page_name.
+						'?access_token='.$this->access_token);
 		} else {
-			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$page_name);
+			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$page_name.
+						'?fbss_v='.$this->plugin_version);
 		}
 		
 		if($json === FALSE) {
@@ -48,13 +51,17 @@ class FBSS_Facebook {
 		$this->logger->log("getFBPosts with page-id '$page_id' limit '$limit'.",
 				 __LINE__);
 		
+		$fields = array('id');
+		
 		if ($this->access_token) {
-			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.$page_id.
-					'/posts?fields=message&limit='.$limit.'&access_token='.
-					$this->access_token);
+			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.
+						self::FB_GRAPH_VERSION.'/'.$page_id.
+						'/posts?fields='.implode(',',$fields).'&limit='.$limit.
+						'&access_token='.$this->access_token);
 		} else {
 			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$page_id.
-					'/posts?fields=message&limit='.$limit);
+						'/posts?fields='.implode(',',$fields).'&limit='.$limit.
+						'&fbss_v='.$this->plugin_version);
 		}
 		
 		if($json === FALSE) {
@@ -69,11 +76,20 @@ class FBSS_Facebook {
 	public function getFBMessage ($msg_id) {
 		$this->logger->log("getFBMessage with msg-id '$msg_id'.", __LINE__);
 		
+		$fields = array('id', 'message', 'type', 'status_type', 'created_time', 
+				'updated_time', 'object_id', 'actions', 'link', 'picture,name', 
+				'caption', 'description', 'source', 'shares', 'is_hidden',
+				'is_expired', 'likes.summary(true)', 'comments.summary(true)');
+		
 		if ($this->access_token) {
-			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.$msg_id.
-					'?access_token='.$this->access_token);
+			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.
+						self::FB_GRAPH_VERSION.'/'.$msg_id.
+						'?fields='.implode(',',$fields).'&access_token='.
+						$this->access_token);
 		} else {
-			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$msg_id);
+			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$msg_id.
+						'?fields='.implode(',',$fields).'&fbss_v='.
+						$this->plugin_version);
 		}
 		
 		if($json === FALSE) {
@@ -88,58 +104,23 @@ class FBSS_Facebook {
 	public function getFBImage ($img_id) {
 		$this->logger->log("getFBImage with img-id '$img_id'.", __LINE__);
 		
+		$fields = array('id', 'source', 'images', 'picture', 'width', 'height', 
+				'name', 'created_time', 'updated_time');
+		
 		if ($this->access_token) {
-			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.$img_id.
-					'?access_token='.$this->access_token);
+			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.
+						self::FB_GRAPH_VERSION.'/'.$img_id.
+						'?fields='.implode(',',$fields).'&access_token='.
+						$this->access_token);
 		} else {
-			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$img_id);
+			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$img_id.
+						'?fields='.implode(',',$fields).'&fbss_v='.
+						$this->plugin_version);
 		}
 		
 		if($json === FALSE) {
 			$this->logger->log("Facebook-API did not return valid JSON for ".
 					"img-id '$img_id': $json", __LINE__, true);
-			return false;
-		}
-		
-		return $json;
-	}
-	
-	public function getLikeCount ($msg_id) {
-		$this->logger->log("getLikeCount with msg-id '$msg_id'.", __LINE__);
-		
-		if ($this->access_token) {
-			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.$msg_id.
-					'?access_token='.$this->access_token.
-					'&fields=likes.summary(true)');
-		} else {
-			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$msg_id.
-					'?fields=likes.summary(true)');
-		}
-		
-		if($json === FALSE) {
-			$this->logger->log("Facebook-API did not return valid JSON for ".
-					"msg-id '$msg_id': $json", __LINE__, true);
-			return false;
-		}
-		
-		return $json;
-	}
-	
-	public function getCommentCount ($msg_id) {
-		$this->logger->log("getCommentCount with msg-id '$msg_id'.", __LINE__);
-		
-		if ($this->access_token) {
-			$json = @file_get_contents(self::FB_GRAPH_URI.'/'.$msg_id.
-					'?access_token='.$this->access_token.
-					'&fields=comments.summary(true)');
-		} else {
-			$json = @file_get_contents(self::FALLBACK_GRAPH_URI.'/'.$msg_id.
-					'?fields=comments.summary(true)');
-		}
-		
-		if($json === FALSE) {
-			$this->logger->log("Facebook-API did not return valid JSON for ".
-					"msg-id '$msg_id': $json", __LINE__, true);
 			return false;
 		}
 		

@@ -3,8 +3,8 @@ Contributors: Daniele Angileri
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLXKFHGZ9WWGN
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
-Tested up to: 4.2.2
-Stable tag: 1.3.5
+Tested up to: 4.2.3
+Stable tag: 1.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,7 @@ It would be nice to contact me if you have troubles before you leave a bad ratin
 * HTML-links of Hashtags
 * HTML-links of message URLs
 * modern **HTML5 video** delivery
+* display **YouTube** videos as video-box
 
 
 == Installation ==
@@ -91,6 +92,14 @@ I did not use Flash on purpose. Many mobile phones do not support it and it will
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+
+= 1.3.7 =
+* WordPress compatibility-tests with version 4.2.3
+
+= 1.3.6 =
+* Display shared videos (e.g. YouTube) as video-box
+* Switched to Facebook Graph API v2.4
+* Reduced API calls
 
 = 1.3.5 =
 * QuickFix for Facebook API changes

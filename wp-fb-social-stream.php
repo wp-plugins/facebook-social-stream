@@ -5,7 +5,7 @@ Plugin URI: http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-str
 Description: Reads facebook page data and provides social stream
 Author: Daniele Angileri <daniele@angileri.det>
 Author URI: http://angileri.de
-Version: 1.3.5
+Version: 1.3.7
 Text Domain: wp-fb-social-stream
 License: GPLv2
 
@@ -42,7 +42,7 @@ require_once('lib/FBSS_Update.php');
 class WP_FB_SocialStream {
 	
 	private static $plugin_name = 'Facebook Social Stream';
-	private static $plugin_version = '1.3.5';
+	private static $plugin_version = '1.3.7';
 	private static $plugin_version_key = 'fbss_plugin_version';
 	
 	private static $logger;
@@ -87,7 +87,7 @@ class WP_FB_SocialStream {
 			$admin = new FBSS_Admin;
 			
 			/* settings link */
-			add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 
+			add_filter( 'plugin_action_links_' . plugin_basename(__FILE__),
 							array(__CLASS__, 'setPluginSettingsLink') );
 		}
 		
@@ -98,9 +98,9 @@ class WP_FB_SocialStream {
 		FBSS_Shortcodes::register();
 		
 		/* register ajax handler to update social stream */
-		add_action('wp_ajax_wp_fb_social_stream_update', 
+		add_action('wp_ajax_wp_fb_social_stream_update',
 						array(__CLASS__, 'ajaxUpdateSocialStream'));
-		add_action('wp_ajax_nopriv_wp_fb_social_stream_update', 
+		add_action('wp_ajax_nopriv_wp_fb_social_stream_update',
 						array(__CLASS__, 'ajaxUpdateSocialStream'));
 		add_action('wp_ajax_wp_fb_social_stream_force_update',
 						array(__CLASS__, 'ajaxForceUpdateSocialStream'));
@@ -144,8 +144,8 @@ class WP_FB_SocialStream {
 	
 	public static function setPluginSettingsLink($links) {
 		$mylinks = array(
- 			'<a href="'. 
-			admin_url('options-general.php?page=wp-fb-social-stream-settings'). 
+ 			'<a href="'.
+			admin_url('options-general.php?page=wp-fb-social-stream-settings').
 			'">'.__('Settings', 'wp-fb-social-stream').'</a>'
  		);
 		
@@ -162,7 +162,7 @@ class WP_FB_SocialStream {
 		$last_update_time = get_option('fbss_setting_last_data_update');
 		if (!$last_update_time) {
 			$last_update_time = time();
-			add_option('fbss_setting_last_data_update', 
+			add_option('fbss_setting_last_data_update',
 						$last_update_time);
 		}
 		
@@ -209,7 +209,7 @@ class WP_FB_SocialStream {
 	}
 	
 	public static function initTextDomain() {
-		load_plugin_textdomain( 'wp-fb-social-stream', false, 
+		load_plugin_textdomain( 'wp-fb-social-stream', false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
 	

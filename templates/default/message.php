@@ -1,8 +1,8 @@
 <?php
 /**
  * Do not change this default template!
- * 
- * 	You can create your own template in 
+ *
+ * 	You can create your own template in
  * 	templates/{your-template-name}/message.php
  */
 
@@ -18,7 +18,16 @@ require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php'
 				<img src="http://graph.facebook.com/<?php echo esc_html($page_name); ?>/picture" alt="<?php _e('profile picture', 'wp-fb-social-stream'); ?>" />
 			</div>
 			<div class="fb-metadata">
+				<?php if ( isset($extensions['fbss-extension-facebook-comments']) ) : ?>
+				<script>
+				jQuery( document ).ready(function() {
+					fbss_comment_<?php esc_attr_e($i); ?> = new FBSS_Comments('fbss-comment-link-<?php esc_attr_e($i); ?>', 'fbss-extension-comment-<?php esc_attr_e($i); ?>', '<?php esc_attr_e($msg_obj_id); ?>', '<?php esc_attr_e($i); ?>')
+				});
+				</script>
+				<a href="" onclick="fbss_comment_<?php esc_attr_e($i); ?>.show(); return false;" id="fbss-comment-link-<?php esc_attr_e($i); ?>" class="fb-share-link" rel="nofollow">
+				<?php else : ?>
 				<a href="<?php echo esc_html($msg_share_link); ?>" class="fb-share-link" rel="nofollow" target="_blank">
+				<?php endif; ?>
 					<span class="fb-likes"><i class="fa fa-thumbs-o-up"></i> <?php echo esc_html($msg_likes); ?></span><br>
 					<span class="fb-comments"><i class="fa fa-comment"></i> <?php echo esc_html($msg_comments); ?></span>
 					
@@ -106,7 +115,7 @@ require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php'
 					
 					<?php if ($video_description) : ?>
 					<div class="fb-message-video-desc">
-						<?php 
+						<?php
 							$video_description = esc_html($video_description);
 							echo FBSS_TemplateStringUtils::createMessageHTML($video_description);
 						?>
@@ -128,7 +137,7 @@ require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php'
 						
 						<?php if ($video_description) : ?>
 						<div class="fb-message-video-desc">
-							<?php 
+							<?php
 								$video_description = esc_html($video_description);
 								echo FBSS_TemplateStringUtils::createMessageHTML($video_description);
 							?>
@@ -140,6 +149,10 @@ require_once(plugin_dir_path(__FILE__).'/../../lib/FBSS_TemplateStringUtils.php'
 				<?php endif; ?>
 			</div>
 			<!-- /.fb-message-video -->
+			<?php endif; ?>
+			
+			<?php if ( isset($extensions['fbss-extension-facebook-comments']) ) : ?>
+			<div style="display:none" class="fbss-extension-facebook-comments" id="fbss-extension-comment-<?php esc_attr_e($i); ?>"></div>
 			<?php endif; ?>
 		</div>
 		<!-- /.fb-message-wrap -->

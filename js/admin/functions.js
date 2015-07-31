@@ -9,7 +9,7 @@ function updateSocialStream() {
 
 	jQuery('#wp-fb-social-stream-refresh i').removeClass('fa-refresh');
 	jQuery('#wp-fb-social-stream-refresh i').addClass('fa-download');
-	jQuery('#wp-fb-social-stream-refresh i').addClass('blink')
+	jQuery('#wp-fb-social-stream-refresh i').addClass('blink');
 	
 	jQuery.ajax({
 		type:'POST',

@@ -3,7 +3,7 @@ Contributors: Daniele Angileri
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLXKFHGZ9WWGN
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
-Tested up to: 4.2.2
+Tested up to: 4.2.3
 Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,6 +49,9 @@ It would be nice to contact me if you have troubles before you leave a bad ratin
 * modern **HTML5 video** delivery
 * display **YouTube** videos as video-box
 
+= NEW Extensions =
+* show **Facebook comments** within your stream
+
 
 == Installation ==
 
@@ -93,72 +96,101 @@ I did not use Flash on purpose. Many mobile phones do not support it and it will
 
 == Changelog ==
 
+= 1.4.0 =
+* Features
+	* Extensions area available for new features
+	* Introduced main administration page
+* Enhancements
+	* Outsourced inline HTML into template-views
+
 = 1.3.6 =
-* Display shared videos (e.g. YouTube) as video-box
-* Switched to Facebook Graph API v2.4
-* Reduced API calls
+* Features
+	* Display shared videos (e.g. YouTube) as video-box
+* Enhancements
+	* Switched to Facebook Graph API v2.4
+	* Reduced API calls
 
 = 1.3.5 =
-* QuickFix for Facebook API changes
+* Bugfixes
+	* QuickFix for Facebook API changes
 
 = 1.3.4 =
-* Show last stream-update time on settings page
-* Update stream manually via settings page
+* Features
+	* Show last stream-update time on settings page
+	* Update stream manually via settings page
 
 = 1.3.3 =
-* Added video messages as HTML5 video player (Flash dies anyway)
-* Added text-color-customization options of default template
-* Recognize WordPress timezone settings for date output
-* Harmonized plugin option names
+* Features
+	* Added video messages as HTML5 video player (Flash dies anyway)
+	* Added text-color-customization options of default template
+* Enhancements
+	* Recognize WordPress timezone settings for date output
+	* Harmonized plugin option names
 
 = 1.3.2 =
-* Replace \n with html line-breaks in message-text
+* Enhancements
+	* Replace \n with html line-breaks in message-text
 
 = 1.3.1 =
-* Improved regex to identify hashtags and links in message-text
+* Enhancements
+	* Improved regex to identify hashtags and links in message-text
 
 = 1.3.0 =
-* Added color-customization to plugin-settings
-* Added color-picker to settings page
-* Introduced configuration of template-styling
-* Save current version number in database for later update routines
-* Update stream automatically if page-name or access-token changed or max-messages increased
+* Features
+	* Added color-customization to plugin-settings
+	* Added color-picker to settings page
+	* Introduced configuration of template-styling
+* Enhancements
+	* Save current version number in database for later update routines
+	* Update stream automatically if page-name or access-token changed or max-messages increased
 
 = 1.2.6 =
-* Set Javascript variables via wp_localize_script() to identify ajax-url in script
+* Enhancements
+	* Set Javascript variables via wp_localize_script() to identify ajax-url in script
 
 = 1.2.5 =
-* Changed default value of update interval
-* Set database table to innoDB engine to prevent "Specified key was too long" error
+* Enhancements
+	* Changed default value of update interval
+* Bugfixes
+	* Set database table to innoDB engine to prevent "Specified key was too long" error
 
 = 1.2.4 =
-* Fixed Javascript error
+* Bugfixes
+	* Fixed Javascript error
 
 = 1.2.3 =
-* Changed CSS style of links without images to prevent whitespace
-* Link to gallery instead of first image of gallery
-* Skip videos until video-player is implemented
+* Enhancements
+ 	* Link to gallery instead of first image of gallery
+ 	* Skip videos until video-player is implemented
+* Bugfixes
+	* Changed CSS style of links without images to prevent whitespace
 
 = 1.2.2 =
-* Validation of Facebook page-name
-* Changed CSS to add responsive behaviour to profile image
+* Enhancements
+	* Validation of Facebook page-name
+	* Changed CSS to add responsive behaviour to profile image
 
 = 1.2.1 =
-* Renamed classes to prevent conflicts with other plugins or themes
+* Enhancements
+	* Renamed classes to prevent conflicts with other plugins or themes
 
 = 1.2.0 =
-* Added schema.org markup to default-template
-* Added alt-attribute to link-image
-* Added German translations
-* Fixed likes- and comments-count
-* Cleanup cached data after changing Facebook page-name
-* Create HTML-links out of message text URLs
-* Create HTML-links out of hashtags in message text
+* Features
+	* Added schema.org markup to default-template
+	* Added German translations
+	* Create HTML-links out of message text URLs
+	* Create HTML-links out of hashtags in message text
+* Bugfixes
+	* Added alt-attribute to link-image
+	* Fixed likes- and comments-count
+* Enhancements
+	* Cleanup cached data after changing Facebook page-name
 
 = 1.1.0 =
-* Added function to identify Facebook post-type "link"
-* Extended default-template to handle Facebook "link" objects
-* Changed colour-theme of default-template into bright grey
+* Features
+	* Added function to identify Facebook post-type "link"
+	* Extended default-template to handle Facebook "link" objects
+	* Changed colour-theme of default-template into bright grey
 
 = 1.0.0  =
 * First version ready to go!

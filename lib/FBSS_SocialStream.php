@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 require_once('FBSS_DB.php');
+require_once('FBSS_ExtensionFactory.php');
 require_once('FBSS_Facebook.php');
 require_once('FBSS_Logger.php');
 require_once('FBSS_Registry.php');
@@ -15,6 +16,7 @@ class FBSS_SocialStream {
 	private $logger;
 	private $template;
 	private $template_name;
+	private $extension_factory;
 	
 	private $page_id;
 	private $page_name;
@@ -30,6 +32,7 @@ class FBSS_SocialStream {
 		$this->logger = new FBSS_Logger(__CLASS__);
 		$this->template = new FBSS_Template;
 		$this->template_name = $this->template->getName();
+		$this->extension_factory = new FBSS_ExtensionFactory;
 	}
 	
 	public function get($limit=20) {
@@ -37,6 +40,15 @@ class FBSS_SocialStream {
 		
 		$this->logger->log("Get '$limit' social stream posts from page ".
 				"'$page_name'.", __LINE__);
+		
+		try {
+			// do not die here if extension-check does not work!
+			$extensions = $this->extension_factory->getInstalledExtensions(true);
+		} catch (Exception $e) {
+			$this->logger->log("Could not recieve installed extensions with ".
+					"license check. Maybe license service is down or internet ".
+					"connection is blocked!", __LINE__);
+		}
 		
 		$messages = $this->db->getByType('message', $limit);
 
@@ -74,8 +86,8 @@ class FBSS_SocialStream {
 			
 			/* translators: date format, see http://php.net/date */
 			$date_format = __('jS \of %\s Y h:i A', 'wp-fb-social-stream');
-			$msg_date_string = sprintf( 
-					date($date_format, $msg_date_timestamp_local), 
+			$msg_date_string = sprintf(
+					date($date_format, $msg_date_timestamp_local),
 					$msg_date_month_translated );
 			
 			
@@ -84,13 +96,14 @@ class FBSS_SocialStream {
 			$msg_comments = 0;
 			
 			if (property_exists($msg_data_obj, 'likes')) {
-				$msg_likes = $msg_data_obj->likes->summary->total_count;				
+				$msg_likes = $msg_data_obj->likes->summary->total_count;
 			}
 			if (property_exists($msg_data_obj, 'comments')) {
 				$msg_comments = $msg_data_obj->comments->summary->total_count;
 			}
 			
 			# handle message types
+			# TODO maybe change to array
 			$img_id = '';
 			$img_src = '';
 			$img_widht = '';
@@ -139,8 +152,8 @@ class FBSS_SocialStream {
 				}
 				if (property_exists($msg_data_obj, 'description')) {
 					$link_description = $msg_data_obj->description;
-					if (strlen($link_description) > 120) { 
-						$link_description = substr($link_description,0, 120) . "..."; 
+					if (strlen($link_description) > 120) {
+						$link_description = substr($link_description,0, 120) . "...";
 					}
 				}
 			} else if ($msg_type == 'video') {
@@ -152,7 +165,7 @@ class FBSS_SocialStream {
 				}
 				if (property_exists($msg_data_obj, 'description')) {
 					$video_description = $msg_data_obj->description;
-				}					
+				}
 			}
 			
 			ob_start();
@@ -223,7 +236,7 @@ class FBSS_SocialStream {
 					continue;
 				}
 				
-				$this->logger->log("Retrieved image with id '$object_id'.", 
+				$this->logger->log("Retrieved image with id '$object_id'.",
 						__LINE__);
 
 				$objImage = json_decode($image_json);

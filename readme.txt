@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
 Tested up to: 4.2.3
-Stable tag: 1.3.6
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,11 @@ I did not use Flash on purpose. Many mobile phones do not support it and it will
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+
+= 1.4.1 =
+* Bugfixes
+	* Fixed settings link in plugin-view
+	* Renamed extension-updater to prevent naming-collision
 
 = 1.4.0 =
 * Features

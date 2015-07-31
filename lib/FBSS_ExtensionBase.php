@@ -1,6 +1,6 @@
 <?php
 
-require_once('EDD/EDD_SL_Plugin_Updater.php');
+require_once('EDD/FBSS_EDD_SL_Plugin_Updater.php');
 
 
 class FBSS_ExtensionBase {
@@ -107,7 +107,7 @@ class FBSS_ExtensionBase {
 		
 		$license_key = self::getLicenseKey();
 		if ($license_key) {
-			$edd_updater = new EDD_SL_Plugin_Updater(
+			$edd_updater = new FBSS_EDD_SL_Plugin_Updater(
 					self::LICENSE_SERVICE, static::$plugin_uri, array(
 						'version' 	=> static::$version,
 						'license' 	=> $license_key,

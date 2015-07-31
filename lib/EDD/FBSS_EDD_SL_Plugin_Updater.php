@@ -9,7 +9,7 @@
  * @author Pippin Williamson
  * @version 1.6
  */
-class EDD_SL_Plugin_Updater {
+class FBSS_EDD_SL_Plugin_Updater {
 	private $api_url   = '';
 	private $api_data  = array();
 	private $name      = '';

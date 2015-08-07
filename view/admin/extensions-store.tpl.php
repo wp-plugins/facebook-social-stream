@@ -80,7 +80,7 @@
 			  				<div class="fbss-extension-name"><?php esc_html_e( $view_data['extensions_available'][$ext_key]['name'] ); ?></div>
 				  			<div class="fbss-extension-desc"><?php esc_html_e( $view_data['extensions_available'][$ext_key]['desc'] ); ?></div>
 				  			<div class="fbss-extension-dl">
-				  				<a href="<?php esc_attr_e( $view_data['extensions_available'][$ext_key]['download'] ); ?>" target="_blank" title=<?php _e('Download', 'wp-fb-social-stream'); ?> class="button button-primary"><?php _e('Download', 'wp-fb-social-stream'); ?></a>
+				  				<a href="<?php esc_attr_e( $view_data['extensions_available'][$ext_key]['download'] ); ?>" target="_blank" title="<?php _e('Download', 'wp-fb-social-stream'); ?>" class="button button-primary"><?php _e('Download', 'wp-fb-social-stream'); ?></a>
 				  			</div>
 				  		</div>
 				  		<!-- /.fbss-extension-data -->

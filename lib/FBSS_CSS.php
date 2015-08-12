@@ -31,7 +31,7 @@ class FBSS_CSS {
 			wp_enqueue_style('font-awesome', $style_dir.'/font-awesome-4.3.0/'.
 				'css/font-awesome.min.css', array(), $plugin_version, 'all');
 			
-			wp_enqueue_style('wp-fb-social-stream', $style_uri, 
+			wp_enqueue_style('wp-fb-social-stream', $style_uri,
 				array('font-awesome'), $plugin_version, 'all');
 		} else {
 			wp_enqueue_style('wp-fb-social-stream', $style_uri, array(),
@@ -60,23 +60,47 @@ class FBSS_CSS {
 							$prefix = $sub_config['actions']['copy_value_from']['value_prefix'];
 							$suffix = $sub_config['actions']['copy_value_from']['value_suffix'];
 							
-							$css_string = sprintf('%s {%s: %s#%s%s;}',
-									$sub_config['selector'], $sub_config['property'],
-									$prefix, $css_val, $suffix);
+							if ($sub_config['type'] == 'hexcode') {
+								$css_string = sprintf('%s {%s: %s#%s%s;}',
+										$sub_config['selector'], $sub_config['property'],
+										$prefix, $copy_from_val, $suffix);
+							} elseif ($sub_config['type'] == 'size') {
+								$unit = $template->getDBOptionsValue($copy_from_key.'_u');
+								$css_string = sprintf('%s {%s: %s%s%s;}',
+										$sub_config['selector'], $sub_config['property'],
+										$prefix, $copy_from_val.$unit, $suffix);
+							} else {
+								$css_string = sprintf('%s {%s: %s%s%s;}',
+										$sub_config['selector'], $sub_config['property'],
+										$prefix, $copy_from_val, $suffix);
+							}
+							
 							array_push($custom_css, $css_string);
 							continue;
 						}
 					}
 				}
 				
-				$db_options_key = $template->getDBOptionsKey($config_index, 
-									$sub_config['config_id']);
+				$db_options_key = $template->getDBOptionsKey($config_index,
+						$sub_config['config_id']);
 				$css_val = $template->getDBOptionsValue($db_options_key);
 				
 				if ($css_val) {
-					$css_string = sprintf('%s {%s: #%s;}', 
-						$sub_config['selector'], $sub_config['property'], 
-						$css_val);
+					if ($sub_config['type'] == 'hexcode') {
+						$css_string = sprintf('%s {%s: #%s;}',
+								$sub_config['selector'], $sub_config['property'],
+								$css_val);
+					} elseif ($sub_config['type'] == 'size') {
+						$unit = $template->getDBOptionsValue($db_options_key.'_u');
+						$css_string = sprintf('%s {%s: %s;}',
+								$sub_config['selector'], $sub_config['property'],
+								$css_val.$unit);
+					} else {
+						$css_string = sprintf('%s {%s: %s;}',
+								$sub_config['selector'], $sub_config['property'],
+								$css_val);
+					}
+					
 					array_push($custom_css, $css_string);
 				}
 			}

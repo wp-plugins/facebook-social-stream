@@ -19,7 +19,7 @@
 	padding-left: 15px;
 }
 .wp-fb-social-stream .fb-info {
-	width: 16.66666667%;
+	max-width: 16.66666667%;
 }
 .wp-fb-social-stream .fb-metadata {
 	padding-top: 5px;
@@ -38,7 +38,7 @@
 	height: auto;
 }
 .wp-fb-social-stream .fb-message-wrap {
-	width: 83.33333333%;
+	max-width: 83.33333333%;
 	
 	background-color: #EDEDED;
 	border: 2px solid #EDEDED;

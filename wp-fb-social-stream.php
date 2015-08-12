@@ -5,7 +5,7 @@ Plugin URI: http://angileri.de/blog/en/free-wordpress-plugin-facebook-social-str
 Description: Reads facebook page data and provides social stream
 Author: Daniele Angileri <daniele@angileri.de>
 Author URI: http://angileri.de
-Version: 1.4.1
+Version: 1.4.3
 Text Domain: wp-fb-social-stream
 License: GPLv2
 
@@ -42,7 +42,7 @@ require_once('lib/FBSS_Update.php');
 class WP_FB_SocialStream {
 	
 	private static $plugin_name = 'Facebook Social Stream';
-	private static $plugin_version = '1.4.1';
+	private static $plugin_version = '1.4.3';
 	private static $plugin_version_key = 'fbss_plugin_version';
 	
 	private static $logger;

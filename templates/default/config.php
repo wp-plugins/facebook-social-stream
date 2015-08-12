@@ -1,8 +1,8 @@
 <?php
 /**
  * Do not change this default template-configuration!
- * 
- * 	You can create your own template in 
+ *
+ * 	You can create your own template in
  * 	templates/{your-template-name}/config.php
  */
 
@@ -17,6 +17,13 @@ $template_config = array(
 			'config'	=> array(
 				'index'		=> 'message_box',
 				'configs'	=> array(
+					array(
+						'config_id'		=> 7,
+						'desc'			=> __('Maximum width', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-message-wrap',
+						'property'		=> 'max-width',
+						'type'			=> 'size'
+					),
 					array(
 						'config_id'		=> 1,
 						'desc'			=> __('Background color', 'wp-fb-social-stream'),
@@ -70,6 +77,13 @@ $template_config = array(
 			'config'	=> array(
 				'index'			=> 'meta_box',
 				'configs'		=> array(
+					array(
+						'config_id'		=> 2,
+						'desc'			=> __('Maximum width', 'wp-fb-social-stream'),
+						'selector' 		=> '.wp-fb-social-stream .fb-info',
+						'property'		=> 'max-width',
+						'type'			=> 'size'
+					),
 					array(
 						'config_id'		=> 1,
 						'desc'			=> __('Background color', 'wp-fb-social-stream'),

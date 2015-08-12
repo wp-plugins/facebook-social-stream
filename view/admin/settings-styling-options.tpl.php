@@ -18,6 +18,14 @@
 							<td>
 							<?php if ($child_row['type'] == 'hexcode') :?>
 								#<input type="text" name="<?php esc_attr_e($child_row['input_name']); ?>" value="<?php esc_attr_e($child_row['input_val']); ?>" class="hexcode" size="6" maxlength="6" style="<?php echo ($child_row['input_val']) ? 'border: 2px solid #'.esc_attr($child_row['input_val']) : '' ?>" />
+							<?php elseif($child_row['type'] == 'size') : ?>
+								<?php $selected_option = get_option($child_row['input_name'].'_u', '%') ?>
+
+								<input type="text" name="<?php esc_attr_e($child_row['input_name']); ?>" value="<?php esc_attr_e($child_row['input_val']); ?>" class="size" size="6" />
+								<select name="<?php esc_attr_e($child_row['input_name']); ?>_u" class="size_unit">
+									<option value="%" <?php selected($selected_option, '%'); ?>>%</option>
+									<option value="px" <?php selected($selected_option, 'px'); ?>>px</option>
+								</select>
 							<?php else : ?>
 								<input type="text" name="<?php esc_attr_e($child_row['input_name']); ?>" value="<?php esc_attr_e($child_row['input_val']); ?>" class="regular-text" />
 							<?php endif; ?>

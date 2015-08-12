@@ -6,7 +6,9 @@ jQuery(document).ready(function() {
 			url:wp_fb_social_stream_js_vars.ajaxurl,
 			success: function(data) {
 				if (data) {
-					jQuery(".wp-fb-social-stream").html(data);
+					if ((data.match(/[a-zA-Z]/g) || []).length) {
+						jQuery(".wp-fb-social-stream").html(data);
+					}
 				}
 			},
 			error: function(xhr, status) {

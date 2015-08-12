@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once('FBSS_Logger.php');
 require_once('FBSS_Registry.php');
@@ -48,8 +48,8 @@ class FBSS_Template {
 		return $this->template_config['css'];
 	}
 	
-	public function getConfigurationCSSKeys($with_hidden = true) {
-		$this->logger->log("getConfigurationCSSKeys.", __LINE__);
+	public function getConfigurationCSSKeydata($with_hidden = true) {
+		$this->logger->log("getConfigurationCSSKeydata.", __LINE__);
 		
 		$template_config = $this->template_config;
 		$css_configs = $template_config['css'];
@@ -69,12 +69,18 @@ class FBSS_Template {
 					}
 				}
 				
-				$template_config_key = $config_index.'_'.$sub_config['config_id'];
+				$template_config_key = 'fbss_tplt_cfg_'.$this->template_name.'_'.
+					$config_index.'_'.$sub_config['config_id'];
 		
-				$this->logger->log("Found css config key ".
+				$this->logger->log("Generated css config key ".
 						"'$template_config_key.", __LINE__);
 		
-				array_push($config_keys, $template_config_key);
+				array_push($config_keys, array(
+					'template_config_key' 	=> $template_config_key,
+					'config_index'			=> $config_index,
+					'config_id'				=> $sub_config['config_id'],
+					'type'					=> $sub_config['type'],
+				));
 			}
 		}
 		
@@ -85,10 +91,16 @@ class FBSS_Template {
 		$this->logger->log("getDBOptionsConfigurationCSSKeys.", __LINE__);
 		
 		$option_keys = array();
-		$config_keys = $this->getConfigurationCSSKeys($with_hidden);
+		$config_keydata = $this->getConfigurationCSSKeydata($with_hidden);
 		
-		foreach ($config_keys as $key) {
-			array_push($option_keys, 'fbss_tplt_cfg_'.$this->template_name.'_'.$key);
+		foreach ($config_keydata as $key_data) {
+			
+			array_push($option_keys, $key_data['template_config_key']);
+			
+			# register unit configuration key for size-type configs
+			if ($key_data['type'] == 'size') {
+				array_push($option_keys, $key_data['template_config_key'].'_u');
+			}
 		}
 		
 		return $option_keys;

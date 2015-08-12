@@ -3,8 +3,8 @@ Contributors: Daniele Angileri
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WLXKFHGZ9WWGN
 Tags: facebook, facebook stream, facebook feed, facebook page, facebook wall, facebook posts, custom facebook feed, custom facebook stream, custom facebook wall, custom facebook posts, social media, social stream, responsive, mobile
 Requires at least: 3.0.1
-Tested up to: 4.2.3
-Stable tag: 1.4.1
+Tested up to: 4.3-RC2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,18 @@ I did not use Flash on purpose. Many mobile phones do not support it and it will
 3. Example stream of Facebook page "bbcnews"
 
 == Changelog ==
+= 1.4.3 =
+* Features
+	* Added setting-options for maximum width of the default-template message-box
+	* Added setting-options for maximum width of the default-template meta-box
+	* Added Swedish translations (credits to dreadford)
+* Notes
+	* Tested with 4.3-RC2
+
+= 1.4.2 =
+* Bugfixes
+	* Fixed HTML attribute in extensions overview
+	* Improved Javascript function to identify HTML return value if other plugins or themes produce header-output
 
 = 1.4.1 =
 * Bugfixes
